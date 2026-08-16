@@ -1,0 +1,317 @@
+schema_version: 1
+reviewed_on: 2026-08-16
+purpose: >-
+  Candidate or adjacent-domain sources found during the public-data search but excluded from
+  in-domain trainable counts. A paper claim, public landing page, upon-request statement,
+  login-gated download, or generic sword motion is not treated as acquired fencing training data.
+sources:
+  - id: fd7_fencing_actions
+    url: https://arxiv.org/abs/2404.19383
+    reported_scope: 1,193 clips from 20 professional athletes across seven footwork/action classes
+    exclusion: no_public_dataset_download_located
+    policy: do not count athletes or clips and do not reconstruct labels from the paper
+
+  - id: virtualfencer_reconstructed_motion
+    url: https://arxiv.org/abs/2507.00261
+    reported_scope: 2,210 representative motion samples selected from ten in-the-wild bouts
+    exclusion: no_public_data_or_code_release_located
+    policy: cite as related work only; do not count its samples as PisteFlow inputs
+
+  - id: roboflow_fencing_bout_detection
+    url: https://universe.roboflow.com/fencing-video-splicer/fencing-bout-dataset
+    reported_scope: 516 CC BY 4.0 images, 54 numeric classes plus unlabeled
+    exclusion: semantic_class_mapping_not_published_and_download_requires_account_or_key
+    policy: do not use numeric labels as actions or weapons without an authoritative mapping
+
+  - id: fencing_database_touch_clips
+    url: https://fencingdatabase.com/
+    reported_scope: searchable epee, foil, and sabre touch clips with bout and score metadata
+    exclusion: api_key_required_and_no_explicit_reuse_or_redistribution_license_found
+    policy: retain as a human-viewable discovery source only; do not scrape or count clips
+
+  - id: virtual_fencing_system_fd7_name_collision
+    url: https://www.frontiersin.org/articles/10.3389/fspor.2026.1802474/full
+    reported_scope: 30 para-foil athletes with IMU, sEMG, stiffness, strength, and accuracy measures
+    exclusion: raw_data_available_from_authors_upon_request_not_publicly_deposited
+    policy: supplementary strategy-level descriptive table may inform context but is not athlete-level data
+
+  - id: target_distance_lunge_2026
+    url: https://doi.org/10.3389/fspor.2026.1756804
+    reported_scope: 12 skilled male foil fencers across six movement-by-distance conditions
+    exclusion: raw_data_available_from_authors_upon_request_not_publicly_deposited
+    policy: do not count the 72 condition trials as acquired observations
+
+  - id: cmu_mocap_swordplay
+    url: https://mocap.cs.cmu.edu/search.php?subjectnumber=&motion=swordplay
+    reported_scope: three 120-Hz swordplay trials from one motion-capture subject
+    exclusion: acquired_but_adjacent_swordplay_not_verified_sport_fencing
+    policy: use only as an out-of-domain motion sanity check, never as epee, foil, or sabre training data
+
+  - id: harmony4d_unresolved_weapon_mapping
+    url: https://huggingface.co/datasets/Jyun-Ting/Harmony4D
+    reported_scope: five sword/fencing archive files totaling 117,053,889,267 bytes
+    exclusion: weapon_specific_training_until_authoritative_mapping_exists
+    policy: retain remote inventory and use only for weapon-agnostic pose/occlusion research
+
+  - id: roboflow_fencing_en_garde_keypoints
+    url: https://universe.roboflow.com/project1-smatj/fencing-en-garde-i8vnb
+    reported_scope: CC BY 4.0 en-garde posture and stance keypoint project; the page shows 1,949 preview images but also names a 3,313-image version
+    exclusion: download_requires_account_or_api_key_and_public_page_counts_conflict
+    policy: retain as a candidate source; do not count images or use posture labels until an authenticated archive and exact version can be pinned
+
+  - id: ucf50_fencing_action_class
+    url: https://www.crcv.ucf.edu/data/UCF50.php
+    reported_scope: broad fencing action within the UCF50 web-video benchmark
+    exclusion: predecessor_lineage_potentially_overlaps_acquired_ucf101_fencing_class
+    policy: do not add a second clip count until member-level hashes prove any clips are distinct from the 111 verified UCF101 fencing clips
+
+  - id: huggingface_longsword_spatial_physics_100
+    url: https://huggingface.co/datasets/benito87/longsword-spatial-physics-100
+    reported_scope: card proposes 100 multi-view 120 or 240 FPS historical-longsword clips
+    exclusion: dataset_card_says_in_production_and_repository_currently_contains_no_clips
+    policy: do not count the planned 100 clips; historical longsword would remain adjacent-domain even after release
+
+  - id: huggingface_clerc_data_epee_name_collision
+    url: https://huggingface.co/datasets/CLERC-DATA/epee
+    reported_scope: 600-row American Sign Language dataset whose repository name is epee
+    exclusion: false_positive_not_fencing
+    policy: exclude completely from fencing discovery and counts
+
+  - id: target_distance_lunge_2024
+    url: https://doi.org/10.3390/biomechanics4020020
+    reported_scope: 15 foil fencers performing three successful trials at each of three target distances with 500-Hz motion capture
+    exclusion: supplementary_material_reports_statistical_summary_tables_not_trial_level_raw_motion
+    policy: use publication results as context only; do not count 135 performed trials as acquired observations
+
+  - id: fencevision_parent_action_intervals_and_models
+    url: https://github.com/Electrotime/fencing
+    reported_scope: README reports five bouts, 733 labeled action intervals, and 8,430 generated windows alongside code and model checkpoints
+    exclusion: parent_repository_has_no_license_and_only_embedded_blade_dataset_declares_cc_by_4
+    policy: use only the separately audited blade_dataset subtree; do not count, train on, or redistribute parent action labels, windows, code, or checkpoints
+
+  - id: reli11d_fencing_sequences
+    url: https://www.reli11d.de/
+    reported_scope: multimodal 3D human-motion recordings from 10 actors and 48 sequences across sports including saber, epee, and foil within a 239,000-frame collection
+    exclusion: dataset_request_requires_identity_organization_purpose_and_email_approval
+    policy: retain as a request-gated candidate only; do not count actors, sequences, frames, or modalities as acquired PisteFlow data
+
+  - id: meta_album_stanford40_openml_44325
+    url: https://www.openml.org/d/44325
+    reported_scope: 3,389 Stanford40 action images in the downloaded OpenML task archive
+    exclusion: acquired_archive_contains_no_fencing_class
+    policy: exclude completely from fencing data counts; do not treat sword-adjacent or generic sport classes as fencing
+
+  - id: har_bi_ucf101_hmdb51_bundle
+    url: https://www.kaggle.com/datasets/kaushikjadhav01/human-action-recognition-bi
+    reported_scope: a large derivative bundle of UCF101 and HMDB51 action-recognition media
+    exclusion: derivative_mirror_of_already_audited_ucf101_and_hmdb51_sources
+    policy: do not redownload or add its rows to independent counts; use the pinned member-level UCF101 and HMDB51 audits instead
+
+  - id: ncaa_fencing_championship_2024_kaggle
+    url: https://www.kaggle.com/datasets/aaroncohen7/ncaa-fencing-championship-2024
+    reported_scope: 144 NCAA championship rows
+    exclusion: redundant_subset_of_acquired_official_ncaa_results_archive
+    policy: do not count or train twice; use the larger pinned NCAA archive with year and weapon reconciliation
+
+  - id: kaggle_olympic_fencing_small_mirrors
+    url: https://www.kaggle.com/search?q=olympic+fencing
+    reported_scope: several small third-party Olympic fencing tables
+    exclusion: redundant_with_acquired_cc_by_4_olympic_history_and_official_paris_2024_book
+    policy: do not add mirror rows to athlete, event, medal, bout, match, or relay totals
+
+  - id: sca_fencer_speed_trials
+    url: https://www.kaggle.com/datasets/joshhandel/fencer-speed-data
+    reported_scope: 406 rapier jab and lunge trial rows from 18 Society for Creative Anachronism fighters
+    exclusion: historical_rapier_adjacent_domain_no_participant_ids_unknown_license
+    policy: catalog as adjacent-domain context only; never label as Olympic epee, foil, or sabre athletes or merge with sport-fencing training observations
+
+  - id: animal_crossing_fence_images_name_collision
+    url: https://www.kaggle.com/datasets/rongdianzhu/animal-crossing-fences
+    reported_scope: images of decorative fences from the Animal Crossing game
+    exclusion: false_positive_not_fencing_sport
+    policy: exclude completely from discovery and counts
+
+  - id: samasas_single_fencing_image
+    url: https://www.kaggle.com/datasets/samasas/fencing
+    reported_scope: one generic fencing image in the visible dataset snapshot
+    exclusion: negligible_unlabeled_single_image_with_no_documented_provenance
+    policy: do not add a one-image unknown-provenance mirror when larger license-aware still-image sources are acquired
+
+  - id: hunterpanda_epee_youtube_links
+    url: https://github.com/HunterPanda/FencingAI
+    reported_scope: six public epee YouTube links used by an upstream code project
+    exclusion: link_only_small_candidate_pending_member_overlap_and_rights_audit
+    policy: do not count links as acquired videos; compare YouTube IDs against existing FIE, HACS, ActivityNet, Kinetics, and fencing-reference manifests before any additive claim
+
+  - id: virtualfencer_and_fera_unavailable_releases
+    url: https://github.com/hariharan-deepak/FencingActionRecognition
+    reported_scope: source-list references to VirtualFencer or FERA-style fencing action resources
+    exclusion: no_current_public_downloadable_release_with_verifiable_members_located
+    policy: retain as discovery leads only; do not infer samples from papers, screenshots, or repository references
+
+  - id: syeda_fencer_pose_weights_without_dataset
+    url: https://github.com/SyedaEmanSaleem/Fencer_Pose_Estimation
+    reported_scope: MIT-licensed YOLOv8 pose notebook and 6.7 MB model weights reporting fencer, saber, scorebox, and pose metrics on a manually labelled v4 dataset
+    exclusion: training_dataset_and_label_files_not_published
+    policy: do not count images, keypoints, classes, or reported metrics as independently reproducible; retain the weights as a model lead only
+
+  - id: visimage_yolo_fencing_name_only_fork
+    url: https://github.com/VisImage/yolo_fencing
+    reported_scope: AGPL-licensed fork of the Ultralytics codebase whose repository name mentions fencing
+    exclusion: no_fencing_dataset_annotations_media_or_fencing_specific_model_artifacts_found
+    policy: exclude from fencing source counts; a renamed generic code framework is not a fencing dataset
+
+  - id: fencingmaestro_demo_application
+    url: https://github.com/cinastanbean/FencingMaestro
+    reported_scope: MIT-licensed video-analysis GUI, documentation, and three interface or analysis screenshots
+    exclusion: no_training_dataset_row_annotations_or_source_video_corpus_bundled
+    policy: catalog as adjacent application code only; do not count screenshots as independent training images
+
+  - id: fencing_datacraft_kaggle_derivative
+    url: https://github.com/gsauli42/fencing-datacraft
+    reported_scope: notebooks, one small sample video, and instructions to download the already-audited Fencing Matches AI Kaggle archive
+    exclusion: derivative_workshop_of_already_integrated_source_with_unclear_sample_video_provenance
+    policy: do not add notebook outputs or the sample video as independent data; use the pinned Kaggle member and source-video audit
+
+  - id: elite_lateral_dominance_vr_record_without_files
+    url: https://zenodo.org/records/17492593
+    reported_scope: study description for 85 elite athletes, including 44 fencers, assessed for virtual-reality response time and dynamic visual attention
+    exclusion: zenodo_dataset_record_currently_has_no_deposited_files
+    policy: cite as related work only; do not count 44 fencers or any outcomes until actual row-level or aggregate data files are publicly deposited
+
+  - id: karmehr_ai_fencing_referee_exact_annotation_mirror
+    url: https://github.com/karmehr-arora/ai-fencing-referee
+    reported_scope: 1,959 bundled JSON annotation files plus pose and model code
+    exclusion: every_annotation_json_is_an_exact_byte_mirror_of_the_already_audited_fencing_reference_snapshot
+    policy: do not add files, labels, intervals, or source videos twice; retain only as a provenance-confirmed mirror
+
+  - id: jellobai_fencingvision_staged_stock_demo
+    url: https://github.com/jellobai/FENCINGVISION
+    reported_scope: one staged or stock-source upload and two annotated video derivatives bundled with an application
+    exclusion: no_competition_source_provenance_or_media_license_and_derivatives_share_one_parent
+    policy: do not count as athlete, match, action, or independent video data; use application code only if separately needed
+
+  - id: caroolus_freaks_empty_database
+    url: https://github.com/caroolus/Fencing_data
+    reported_scope: a multi-weapon Django rankings application with a committed db.sqlite3 file
+    exclusion: pinned_database_file_is_zero_bytes_and_repository_contains_no_row_dataset
+    policy: do not infer live rankings or historical athlete rows from application claims or scraper code
+
+  - id: github_fencing_cv_code_and_weight_candidates
+    url: https://github.com/search?q=fencing+computer+vision+dataset&type=repositories
+    reported_scope: several public repositories with fencing analysis code, notebooks, generic pretrained weights, screenshots, or showcase GIFs
+    exclusion: no_independent_fencing_media_or_row_annotations_in_the_pinned_repositories
+    policy: >-
+      AYDXB09/fencing-lunge-tracker, SilverPeak2299/Fencing_Visual_Analysis,
+      Kevin-Duignan/fencing-cam, Wsoren1/fencingCV, seaanli/seanli_aitip,
+      vbfall/halte-legacy, zeyu-rocket/Fencing-recognition, and janpaulpl/fencing-cv
+      remain code or model leads only; never count model weights, synthetic harnesses, GIFs,
+      notebooks, or downstream Roboflow links as new training observations.
+
+  - id: flashmotion_cvpr_2026_announced_not_released
+    url: https://arxiv.org/abs/2603.19770
+    reported_scope: 240 multimodal sequences from 20 volunteers, including fencing forward lunges, with 7.15 million 1000 Hz 2D labels plus RGB, LiDAR, IMU, events, and 60 Hz 3D pose
+    exclusion: paper_promises_community_release_but_no_public_dataset_or_code_endpoint_was_located
+    policy: retain as a high-value release watch item; do not count any sequence, subject, frame, modality, or fencing lunge until files and terms are publicly accessible
+
+  - id: ucf50_fencing_superseded_candidate
+    url: https://www.crcv.ucf.edu/data/UCF50.php
+    reported_scope: at least 100 broad Fencing clips within 6,676 web videos across 50 action classes
+    exclusion: ucf101_is_the_documented_extension_and_its_111_fencing_clips_are_already_selectively_acquired
+    policy: do not add UCF50 as independent data unless a checksum-level comparison proves members absent from the acquired UCF101 class; source-group structure must be preserved if audited later
+
+  - id: longsword_spatial_physics_100_empty_beta
+    url: https://huggingface.co/datasets/benito87/longsword-spatial-physics-100
+    reported_scope: planned 100 synchronized multi-view 120 or 240 FPS historical-longsword clips with biomechanics and thin-blade annotations
+    exclusion: dataset_card_states_q3_2026_release_and_repository_currently_contains_no_data_files
+    policy: retain as adjacent HEMA release watch only; never count the planned schema or clips as acquired Olympic-fencing observations
+
+  - id: clerc_data_epee_sign_language_false_positive
+    url: https://huggingface.co/datasets/CLERC-DATA/epee
+    reported_scope: 600 ASL clips represented by keypoints and gloss annotations
+    exclusion: epee_is_the_dataset_name_but_content_is_american_sign_language_not_fencing
+    policy: exclude completely from fencing discovery, sample counts, and training
+
+  - id: osf_brain_endurance_fencing_protocol_and_results_pdfs
+    url: https://osf.io/g7vhw/
+    reported_scope: brain-endurance training materials and ten participant result PDFs related to fencing
+    exclusion: no_machine_readable_row_dataset_or_complete_raw_training_panel_located
+    policy: retain as a document-level study lead only; do not infer athlete rows, sessions, or outcomes from protocol text and per-person PDFs
+
+  - id: osf_elite_fencing_determinants_delphi
+    url: https://osf.io/g6k83/
+    reported_scope: weapon- and round-specific expert PDFs about elite-performance determinants
+    exclusion: expert_delphi_documents_not_athlete_observations_or_machine_readable_training_data
+    policy: use as qualitative literature context only; never count expert ratings as fencer samples
+
+  - id: osf_embedded_vr_warmup_protocol
+    url: https://osf.io/8ms4q/
+    reported_scope: planned embedded virtual-reality warm-up study with fencing athletes
+    exclusion: protocol_and_power_analysis_only_no_outcome_dataset
+    policy: retain as a future-release lead; do not count planned participants or outcomes
+
+  - id: osf_hyperbaric_fencing_registration_without_files
+    url: https://osf.io/ya75j/
+    reported_scope: hyperbaric-intervention registration involving fencers
+    exclusion: public_record_has_no_downloadable_row_data
+    policy: cite only as a registered-study lead; never count planned or described athletes as acquired data
+
+  - id: plos_british_fencer_caffeine_survey
+    url: https://doi.org/10.3389/fnut.2022.999847
+    reported_scope: article reports 136 British fencers across epee, foil, and sabre; supplement contains product-response rows keyed 1-279
+    exclusion: deposited_row_structure_does_not_expose_a_verified_one_row_per_complete_fencer_crosswalk
+    policy: use publication-level weapon aggregates as context only; do not call 279 spreadsheet IDs fencers or merge incomplete product rows into athlete training data
+
+  - id: plos_simulated_fencing_competition_aggregate_only
+    url: https://doi.org/10.1371/journal.pone.0281600
+    reported_scope: simulated competition study of 18 fencers, 12 men and 6 women
+    exclusion: public_supplements_do_not_deposit_participant_level_trial_rows
+    policy: use reported aggregate findings as context only; do not count 18 participants as locally acquired observations
+
+  - id: huggingface_log45_pose_and_score_empty_repositories
+    url: https://huggingface.co/Log45
+    reported_scope: repository names imply fencing pose or score data
+    exclusion: current_dataset_repositories_contain_no_downloadable_data_files
+    policy: retain as release-watch leads only; do not infer frames, poses, scores, or athletes from repository names
+
+  - id: zenodo_fencing_dataset_records_with_pdf_only_payloads
+    url: https://zenodo.org/search?q=fencing%20dataset
+    reported_scope: multiple recent records describe themselves as fencing datasets
+    exclusion: audited_records_deposit_articles_or_reports_only_without_machine_readable_rows_or_media
+    policy: preserve record-specific links as literature leads; do not count PDF pages, reported samples, or described trials as acquired data
+
+  - id: akai_sports_video_captions_physical_fence_false_positives
+    url: https://huggingface.co/datasets/Akaispacelabs/Akai_Sports_Video_Captions_v1
+    reported_scope: 1,119 contributor-submitted sports clips with human-reviewed English captions
+    exclusion: all_17_fencing_lexical_matches_describe_perimeter_or_chain_link_fences_not_sport_fencing
+    policy: exclude all matched clips and delete their temporary local copies; never count fencing as a substring match without action, athlete, weapon, or bout context
+
+  - id: mendeley_competitive_anxiety_team_sports_without_fencing
+    url: https://data.mendeley.com/datasets/nkp2wv4cfx/2
+    reported_scope: 216 participant rows in a public competitive-anxiety and psychological-skills SPSS file
+    exclusion: inspected_sport_field_contains_only_football_baseball_softball_basketball_and_water_polo
+    policy: exclude all 216 rows from fencing athlete, psychology, and training counts; the locally inspected SAV snapshot may be moved to Trash
+
+  - id: mendeley_sportdb2_without_fencing
+    url: https://data.mendeley.com/datasets/kzkjkt7mx2/2
+    reported_scope: 130 subjects and 168 datasets across eleven activities in a 170 MB public archive
+    exclusion: inspected_activity_codes_are_amf_ath_bas_cfit_cyc_fut_run_ska_soc_tre_and_vol_with_no_fencing
+    policy: exclude the complete archive from fencing samples, sensors, poses, and athlete counts; the locally inspected duplicate ZIPs may be moved to Trash
+
+  - id: chiarazappala_junior_epee_ranking_snapshot
+    url: https://github.com/chiarazappala/fencing
+    reported_scope: junior men's and women's epee ranking CSVs for 2011-2019 plus derived text outputs
+    exclusion: no_repository_license_fie_derived_rows_and_redundant_with_larger_acquired_ranking_panels
+    policy: retain as a literature-replication lead only; do not acquire, merge, or count its ranking memberships independently
+
+  - id: moments_in_time_no_fencing_class
+    url: https://github.com/zhoubolei/moments_models
+    reported_scope: large public action-video benchmark distributed through a request form
+    exclusion: official_v2_and_multi_label_category_lists_have_no_fencing_epee_foil_sabre_or_dueling_class
+    policy: do not request or download this large generic benchmark for PisteFlow; keyword absence and request gating make it non-additive to the fencing corpus
+
+  - id: jhk_womens_epee_2017_2019_notational_events_not_deposited
+    url: https://doi.org/10.5114/jhk/203422
+    reported_scope: 1,840 scoring events from 45 women's epee matches and 38 fencers at the 2017-2019 World Championships
+    exclusion: the 2026 article reports manual notational data but provides no downloadable event table or source-video crosswalk
+    policy: do not reconstruct or count the 1,840 described events as acquired PisteFlow data

@@ -1,0 +1,77 @@
+schema_version: 1
+reviewed_on: 2026-08-14
+review_method: Wikimedia Commons title, description, category, and license metadata
+videos:
+  # Epee: real tournament footage plus visual-dictionary athlete demonstrations.
+  - {title: "File:Epeefence.ogv", weapon: epee, split: test}
+  - {title: "File:Club kampioenschappen schermen.ogv", weapon: epee, split: validation, group_id: dutch_epee_archive}
+  - {title: "File:Wheelchair.ogv", weapon: epee, group_id: wheelchair_epee_leipzig_2010}
+  - {title: "File:EVD-espada-000.ogv", weapon: epee}
+  - {title: "File:EVD-espada-001.ogv", weapon: epee}
+  - {title: "File:EVD-espada-002.ogv", weapon: epee}
+  - {title: "File:EVD-espada-003.ogv", weapon: epee}
+  - {title: "File:EVD-espada-004.ogv", weapon: epee}
+  - {title: "File:EVD-espada-005.ogv", weapon: epee}
+  - {title: "File:EVD-espada-006.ogv", weapon: epee}
+  - title: "File:Paoli wint het kampioenschap professioneel degenschermen.webm"
+    weapon: epee
+    group_id: dutch_professional_epee_1934
+    content_kind: bout
+    weapon_evidence: Commons description explicitly identifies degenschermen (epee)
+    training_segments: [[3, 70]]
+
+  # Foil: competition footage plus visual-dictionary athlete demonstrations.
+  - {title: "File:Foilfence.ogv", weapon: foil, split: validation}
+  - {title: "File:EVD-florete-000.ogv", weapon: foil}
+  - {title: "File:EVD-florete-001.ogv", weapon: foil}
+  - {title: "File:EVD-florete-002.ogv", weapon: foil}
+  - {title: "File:EVD-florete-003.ogv", weapon: foil}
+  - {title: "File:EVD-florete-004.ogv", weapon: foil}
+  - {title: "File:Aspromonte vs. Baldini.ogv", weapon: foil, split: test}
+  - {title: "File:Nederlandse floretkampioenschappen Weeknummer 61-21 - Open Beelden - 56537.ogv", weapon: foil}
+  - {title: "File:Om het floretkampioenschap.webm", weapon: foil}
+  - title: "File:Daniël Giacon- van piraat tot topschermer.webm"
+    weapon: foil
+    group_id: daniel_giacon_profile_2016
+    content_kind: other
+    weapon_evidence: Athlete self-identifies as a Dutch foilist in a published profile
+    training_segments: [[0, 18], [75, 92], [119, 132], [137, 151], [186, 196], [221, 239]]
+
+  # Sabre: competition footage plus visual-dictionary athlete demonstrations.
+  - {title: "File:EVD-sable-000.ogv", weapon: sabre}
+  - {title: "File:EVD-sable-001.ogv", weapon: sabre}
+  - {title: "File:EVD-sable-002.ogv", weapon: sabre}
+  - {title: "File:EVD-sable-003.ogv", weapon: sabre}
+  - {title: "File:EVD-sable-004.ogv", weapon: sabre}
+  - {title: "File:EVD-sable-005.ogv", weapon: sabre}
+  - {title: "File:EVD-sable-006.ogv", weapon: sabre}
+  - {title: "File:EVD-sable-007.ogv", weapon: sabre}
+  - {title: "File:Yakimenko vs. Limbach - Leipzig 2010 PART 1.ogv", weapon: sabre, split: validation}
+  - {title: "File:Coupe du Monde juniors Dourdan - 04.webm", weapon: sabre}
+  - {title: "File:Coupe du Monde juniors Dourdan - 07.webm", weapon: sabre}
+  - {title: "File:Coupe du Monde juniors Dourdan - 10.webm", weapon: sabre}
+  - {title: "File:Coupe du Monde juniors Dourdan - 16.webm", weapon: sabre}
+  - {title: "File:Coupe du Monde juniors Dourdan - 20.webm", weapon: sabre}
+  - {title: "File:Coupe du Monde juniors Dourdan - 22.webm", weapon: sabre}
+  - {title: "File:Coupe du Monde juniors Dourdan - 23.webm", weapon: sabre}
+  - {title: "File:Coupe du Monde juniors Dourdan - 27.webm", weapon: sabre}
+  - {title: "File:Coupe du Monde juniors Dourdan - 31.webm", weapon: sabre}
+  - {title: "File:Coupe du Monde juniors Dourdan - 32.webm", weapon: sabre}
+  - {title: "File:Coupe du Monde juniors Dourdan - 33.webm", weapon: sabre}
+  - {title: "File:Coupe du Monde juniors Dourdan - 34.webm", weapon: sabre}
+  - {title: "File:Coupe du Monde juniors Dourdan - 35.webm", weapon: sabre}
+  - {title: "File:T64 POZDNIAKOVA Sofia - AKSAMIT Monica, 29 May Moscow Sabre 2016.webm", weapon: sabre, split: test}
+  - {title: "File:Sabelschermen.webm", weapon: sabre, group_id: dutch_sabre_1932}
+  - {title: "File:Wapenfeest van de koninklijke officieren schermbond.webm", weapon: sabre, group_id: dutch_sabre_1937}
+  - title: "File:INTERNATIONAAL POLITIE SPORT TOURNOOI-PGM4011947.webm"
+    weapon: sabre
+    group_id: leiden_police_sports_1947
+    content_kind: bout
+    weapon_evidence: Commons description explicitly identifies the fencing segment as sabre
+    training_segments: [[38, 53]]
+  - title: "File:POLITIE SCHERMKAMPIOENSCHAPPEN-PGM4011898.webm"
+    weapon: sabre
+    group_id: dutch_police_sabre_1946
+    content_kind: bout
+    weapon_evidence: Commons description explicitly identifies the championship as sabre
+    training_segments: [[3, 54]]

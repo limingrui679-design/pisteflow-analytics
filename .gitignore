@@ -1,0 +1,36 @@
+.DS_Store
+.idea/
+.vscode/
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/
+
+# Copyright-sensitive or large source media are local-only.
+data/raw/
+data/cache/
+data/models/
+data/processed/*.parquet
+data/processed/**/*.parquet
+data/processed/*.duckdb
+data/processed/**/*.duckdb
+data/processed/*.npz
+data/processed/**/*.npz
+artifacts/
+reports/generated/
+tmp/
+
+# Local credentials and environment settings.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.cache/

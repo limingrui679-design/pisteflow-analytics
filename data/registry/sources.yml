@@ -1,0 +1,710 @@
+schema_version: 1
+reviewed_on: 2026-08-16
+sources:
+  - id: cmu_mocap_swordplay
+    url: https://mocap.cs.cmu.edu/search.php?subjectnumber=&motion=swordplay
+    status: usable_permissive_adjacent_domain_not_sport_fencing
+    repository_policy: acquire and checksum the ASF skeleton plus three AMC motion trials; use only for motion-format and out-of-domain checks
+    scope: one subject, three 120-Hz swordplay trials, 4,784 motion frames
+    notes: CMU explicitly permits copying, modification, and redistribution, but the source label is swordplay rather than Olympic fencing. Do not map it to epee, foil, or sabre or count it as fencing-athlete training data.
+
+  - id: paris_2024_official_fencing_results_book
+    url: https://olympics.com/OG2024/pdf/OG2024/FEN/OG2024_FEN_B99_FEN-------------------------------.pdf
+    status: official_public_results_local_analysis_no_explicit_reuse_license
+    repository_policy: keep the official PDF and privacy-minimized row-level Parquet local; publish parser, source hash, exact aggregates, and validation counts
+    scope: all 12 Paris 2024 Olympic fencing events across epee, foil, and sabre; 212 individual bouts, 72 team matches, and 648 team relay bouts
+    notes: Athlete names are replaced with event-scoped stable pseudonyms in local processed tables. Results are not video-derived actions, live scoring, training interventions, or evidence of causal coaching effects.
+
+  - id: harmony4d_fencing_multiview_pose
+    url: https://huggingface.co/datasets/Jyun-Ting/Harmony4D
+    status: adjacent_domain_pose_inventory_not_modern_sport_fencing
+    repository_policy: publish the exact five-archive inventory, LFS SHA-256 values, the Voxel51 sword-record catalog, and one locally verified preview audit; do not commit the 117.1 GB official archives or treat the mirror as redistributable
+    scope: five official train/test archives totaling 109.015 GiB plus a mirror catalog containing 204 sword-labelled records from eight sequences, including 196 video views and eight 3D scene records
+    notes: Visual review of one 30.05-second 4K view shows staged stick/sword sparring in ordinary clothing, not modern epee, foil, or sabre. The 204 catalog records are synchronized views and 3D records rather than independent bouts, and this source is limited to adjacent-domain pose or occlusion pretraining.
+
+  - id: european_fencing_confederation_result_catalog
+    url: https://www.fencing-efc.eu/results
+    status: public_event_catalog_link_only_no_explicit_reuse_license
+    repository_policy: publish factual event landing and download links plus aggregates; do not republish athlete-level result files without a separate rights review
+    scope: paginated European event catalog from the 2009-10 season onward across epee, foil, and sabre, including result-download links
+    notes: Catalog events are not bouts or athlete observations. Future calendar entries remain separate from completed events, and unlabeled SVG gender/event-type icons are not guessed.
+
+  - id: zenodo_fencing_movement_error_videos
+    url: https://doi.org/10.5281/zenodo.7643646
+    status: usable_cc_by_4_controlled_training_video
+    repository_policy: publish the audited member manifest, labels, checksums, attribution, and aggregate results; keep the 39.8 GB video archives local
+    scope: 1,289 original controlled-training videos plus 1,289 horizontal-mirror augmentations across counterattack, fleche, lunge, and parry; 494 originals have multi-label error annotations
+    notes: Mirrors are not independent samples. The deposit has no athlete identity or weapon field, so evaluation can prevent mirror leakage but cannot claim athlete-independent or weapon-specific generalization.
+
+  - id: usa_fencing_national_tournament_dataset
+    url: https://www.kaggle.com/datasets/rivkalipkovitz/usa-fencing-national-tournament-dataset
+    status: usable_agpl3_local_row_level
+    repository_policy: cache raw and privacy-minimized row tables locally; publish code, hashes, attribution, and aggregates
+    scope: 2016-2020 USA national events across epee, foil, and sabre
+    notes: Names, clubs, countries, and referee fields are dropped; this is not all US fencing and includes youth events.
+
+  - id: france_geocoded_fencing_licence_census
+    url: https://www.data.gouv.fr/datasets/donnees-geocodees-issues-du-recensement-des-licences-et-clubs-aupres-des-federations-sportives-agreees-par-le-ministere-charge-des-sports
+    status: usable_etalab_open_licence_annual_aggregate
+    repository_policy: stream the 2011-2023 official multi-sport files, retain every French Fencing Federation code-110 geography row and normalized table locally, and publish code, resource IDs, source hashes, attribution, annual totals, and schema cautions
+    scope: thirteen annual geocoded fencing-licence censuses with municipality or municipality-QPV rows and available sex and age-band counts
+    notes: Licences are annual memberships by residence rather than unique athletes or practice locations; people can recur across years, post-2019 geography and age schemas differ, and the producer describes geocoded values as estimates.
+
+  - id: france_fencing_clubs_and_equipment
+    url: https://data.sports.gouv.fr/
+    status: usable_etalab_open_licence_infrastructure
+    repository_policy: publish privacy-minimized Data.Sports exports, code, hashes, attribution, aggregates, and current-snapshot caveats
+    scope: 2022-2024 French Fencing Federation club and approved-establishment counts by department plus the current national equipment inventory filtered to listed fencing activities
+    notes: Club and facility rows are infrastructure context rather than athletes, sessions, bouts, current availability guarantees, or evidence of programme quality and adoption.
+
+  - id: rt_fencing_touch_time_images
+    url: https://github.com/CodLiver/RT-Fencing
+    status: usable_noncommercial_local_training
+    repository_policy: publish metadata and grouped evaluation; keep the 937 MB image archive local
+    scope: 12,408 touch-time images, including 6,504 originals, in five upstream action classes
+    notes: Weapon labels are unavailable; mirrored samples and source-match codes must remain grouped.
+
+  - id: facts_fine_grained_fencing_actions
+    url: https://anonymous.4open.science/r/FACTS-B1C5
+    status: verified_public_annotations_media_link_only_no_license
+    repository_policy: cache annotations and media only locally; publish processing code, checksums, duplicate/conflict audit, and aggregates
+    scope: 6,400 balanced annotation rows across eight left/right attack, counter-attack, remise, and riposte labels, resolving to 2,429 unique annotation rows and 2,419 unique clip paths from 401 source-video groups
+    notes: The CSV repeats 3,971 exact rows and one clip path has conflicting labels; repeated rows are not independent clips or distinguishable horizontal flips. The 32.6 GB Dropbox media folder has no verified redistribution license and no weapon labels.
+
+  - id: cmu_fencing_score_detection
+    url: https://huggingface.co/datasets/mastefan/2025-24679-Project-One-Fencing-Score-Detection
+    status: mixed_local_research_and_metadata_only
+    repository_policy: keep embedded frames locally; publish sanitized hashes, grouped metadata, code, and aggregate evaluation only
+    scope: 1,116 embedded foil frames from ten bouts, 2,226 matched red/green signal rows, and 825 YOLO path-and-box rows
+    notes: Only 59 embedded frames are labelled touch and only ten signal rows are touch peaks. The YOLO Parquet has paths and boxes but no image pixels; source-group leakage must be audited instead of trusting its upstream split.
+
+  - id: tokyo_2020_epee_touch_events
+    url: https://github.com/OscarFawcett/Epee-Fencing-Tokyo
+    status: usable_mit_pseudonymized_event_rows
+    repository_policy: cache the pinned workbook; publish direct-name-free event rows, processing code, checksums, attribution, and aggregates
+    scope: 225 ordered rows from ten Tokyo 2020 Olympic epee bouts, including 205 rows with a scorer plus one double-touch row without a single scorer, body target, blade contacts, piste area, clock, and period
+    notes: The other 19 rows without a scorer are retained as uncoded or no-touch exchanges; this is a manually coded partial Olympic sample rather than all epee bouts or sensor ground truth.
+
+  - id: log45_sabre_touch_clips
+    url: https://github.com/Log45/Fencing-Judge-AI
+    status: public_link_only_unknown_license
+    repository_policy: publish a file-link manifest; do not redistribute media
+    scope: 367 real sabre touch-length clips across five source-video groups
+
+  - id: mit_ocw_fencing_demonstrations
+    url: https://ocw.mit.edu/courses/pe-740-fencing-spring-2007/pages/video/
+    status: usable_cc_by_nc_sa_3
+    repository_policy: download locally with attribution and checksum; publish manifest
+    scope: 23 instructional clips covering footwork, thrusts, lunges, and parry-riposte
+
+  - id: internet_archive_fencing_videos
+    url: https://archive.org/details/Flickr-29467365844
+    status: usable_item_level_cc_noncommercial_with_one_no_derivatives_asset
+    repository_policy: download and checksum item-level Creative Commons originals locally; publish attribution and manifests; keep NoDerivatives analysis derivatives local
+    scope: 31 verified videos across four source-event groups, including 30 action-training-eligible videos and 3,379.96 seconds of eligible footage; sixteen additional discovered files currently fail transient retrieval checks
+    notes: The 31 Bell Tower Classic 2012 clips are one event group and remain weapon-unknown. Thirteen 2016 Bell Tower action clips are visually reviewed foil while one interview is excluded. Team Foil is title-labelled foil and NoDerivatives; the Sports Attack item contributes only its reviewed multi-weapon instructional segment.
+
+  - id: physiological_foil_elite_training_camp
+    url: https://doi.org/10.18745/DS.26019
+    status: usable_cc_by_version_unspecified
+    repository_policy: cache the deposited snapshot and deidentified row table locally; publish code, hashes, attribution, and aggregates
+    scope: 18 experienced foil fencers with physiology, body composition, heart rate, gas analysis, exertion, and motion timing measurements
+    notes: The deposited README states CC-BY without a version; values are preserved exactly and do not generalize to epee or sabre.
+
+  - id: peerj_elite_fencer_strength_and_lunge_velocity
+    url: https://doi.org/10.7717/peerj.20879
+    status: usable_cc_by_4_row_level
+    repository_policy: cache both official XLSX supplements and publish normalized CC BY tables with attribution and checksums
+    scope: 45 elite female fencers across epee, foil, and sabre with lunge velocity, strength, and jump measurements; 120 reliability trials from 40 study codes
+    notes: Reliability trials are repeated measurements, not additional athletes; their letter codes are not joined to the primary participant codes without a published crosswalk.
+
+  - id: peerj_professional_fencer_tdcs_cognition
+    url: https://doi.org/10.7717/peerj.17288
+    status: usable_cc_by_4_crossover_measurements
+    repository_policy: cache the official supplement; keep direct-ID-free condition tables local and publish code, checksums, attribution, aggregates, and boundaries
+    scope: 16 professional female fencers with 96 attention condition-mode rows and 32 stop-signal condition rows across sham and anodal tDCS sessions
+    notes: Weapon and intervention order are absent from the supplement; acute laboratory changes are not match outcomes, causal performance evidence, clinical efficacy, or a training prescription.
+
+  - id: figshare_u15_elite_sport_school_fencers
+    url: https://doi.org/10.3389/fphys.2019.00405.s001
+    status: usable_cc_by_4_privacy_minimized_local_rows
+    repository_policy: cache the official CSV and keep the privacy-minimized 23-row fencing table local; publish code, hashes, attribution, counts, and claim boundaries
+    scope: 23 U15 fencing athletes with anthropometry, eye-hand reaction time, back strength, resting heart rate, vital capacity, hemoglobin, and blood pressure within a 97-athlete six-sport study
+    notes: Weapon and longitudinal training outcomes are absent. Source row labels, sex code, urine-protein code, and puberty or maturation fields are excluded from the analytic table.
+
+  - id: peerj_professional_fencer_sleep_wake
+    url: https://doi.org/10.7717/peerj.18812
+    status: usable_cc_by_4_with_snapshot_discrepancies
+    repository_policy: retain every supplement row locally; publish code, flags, checksums, and aggregates without inventing an inclusion rule
+    scope: 2,607 wearable sleep rows across 25 study codes from professional fencing athletes
+    notes: The article reports 2,459 valid days from 23 athletes and says 2023, while the supplement has 25 codes dated 2022; weapon labels are not published.
+
+  - id: uhra_competitive_fencer_injury_survey
+    url: https://doi.org/10.18745/ds.00026192
+    status: usable_cc_by_injured_only_snapshot
+    repository_policy: retain anonymous rows locally; publish code, checksums, and aggregates; do not model injury onset without uninjured controls
+    scope: 270 injured competitive U.S. fencing respondents across all three weapons and up to five detailed injury slots
+    notes: The deposited XLSX has 270 by 86 cells, not the README's stated 491 rows, and every row reports a prior fencing injury.
+
+  - id: uhra_elite_fencer_hand_injury_survey
+    url: https://doi.org/10.18745/ds.00027141
+    status: usable_cc_by_with_snapshot_discrepancies
+    repository_policy: omit open-text narratives from processed analytics; publish code, checksums, flags, and aggregates
+    scope: 148 deposited rows from internationally competitive U.S. fencers across epee, foil, and sabre
+    notes: The README reports 152 records and 142 eligible completed surveys; the CSV has 148 rows including seven fully empty rows, exact duplicates, and some ages below the stated inclusion threshold.
+
+  - id: uhra_wheelchair_epee_oxygen_uptake
+    url: https://doi.org/10.18745/ds.00027179
+    status: usable_cc_by_4_with_snapshot_discrepancies
+    repository_policy: cache the official ZIP; publish normalized anonymous tables, code, checksums, and aggregates with the missing-sheet warning
+    scope: 11 elite wheelchair-epee participant summaries and 23,517 acquired second-level competition rows for participant codes F3 and F7
+    notes: The README describes raw WFST and bout sheets plus seven competition participants, but the deposited ZIP contains CSV exports for only the summary sheet, F3, and F7; absent rows are not reconstructed.
+
+  - id: figshare_womens_wheelchair_foil_temporal_structure
+    url: https://doi.org/10.6084/m9.figshare.30598058.v1
+    status: usable_cc_by_4_row_level
+    repository_policy: cache the SAV and publish the 44-row bout table, codebook, checksums, attribution, and aggregates
+    scope: 44 observed international women's wheelchair-foil direct-elimination bouts, 22 category A and 22 category B, with 107 source timing and sequence variables
+    notes: Rows are bouts, not athlete identities; the deposit provides neither point-level actions nor source-video URLs.
+
+  - id: figshare_three_weapon_handedness_rankings
+    url: https://doi.org/10.6084/m9.figshare.30163016.v1
+    status: usable_cc_by_4_name_minimized_row_level
+    repository_policy: cache the official workbook; publish a direct-name-free ranking panel, code, checksums, attribution, and aggregates
+    scope: 35,270 epee, foil, and sabre year-end top-300 ranking memberships from 2004-2023, representing 9,668 published name spellings and 9,600 normalized spelling keys
+    notes: Rows are ranking memberships rather than independent athletes; missing handedness remains unknown and tied or repeated rank keys are preserved.
+
+  - id: frontiers_2021_three_weapon_handedness_relative_age
+    url: https://doi.org/10.3389/fspor.2021.662203
+    status: usable_cc_by_4_privacy_minimized_row_level
+    repository_policy: cache the official supplementary workbook; keep direct-ID-free panels local and publish code, checksums, attribution, aggregates, and the source discrepancy
+    scope: 24,000 top-200 epee, foil, and sabre ranking memberships from 2007-2016 across 8,125 source athlete keys; 9,858 overlapping athlete-category memberships
+    notes: Exact birth dates, direct source IDs, and full country names are removed. The annual flags sum to 23,998 rather than 24,000, and overlap with the separate 2004-2023 handedness panel is not entity-resolved or added as independent athletes.
+
+  - id: figshare_youth_fencers_relative_age_2019
+    url: https://doi.org/10.6084/m9.figshare.15183846.v2
+    status: usable_cc_by_4_privacy_minimized_row_level
+    repository_policy: cache the official workbook and keep the direct-ID-free 405-row fencing subset local; publish code, hashes, attribution, exact aggregates, and privacy transformations
+    scope: 405 youth fencers ranked 1-20 in 2019 across epee, foil, and sabre, including 157 epee, 151 foil, and 97 sabre rows from U-11 through U-17
+    notes: Exact birth dates and direct source IDs for minors are removed and age is rounded to one decimal year. Cross-sectional ranking rows are not bouts, longitudinal outcomes, current rankings, or evidence that birth timing causes performance.
+
+  - id: frontiers_riposte_adapted_fencing_pilot
+    url: https://doi.org/10.3389/fonc.2024.1335442.s001
+    status: usable_cc_by_4_deidentified_attendance_and_published_aggregates
+    repository_policy: cache the official supplement; publish deidentified attendance rows, group-level outcome estimates, code, hashes, attribution, and explicit clinical boundary
+    scope: 24 adapted-fencing programme participants, 209 attended sessions, and 28 published group-level secondary-outcome rows
+    notes: Participants are patients after breast-cancer surgery rather than competitive fencers. Outcome rows are aggregates rather than additional people, and this small pilot does not establish clinical efficacy or general athletic-training effects.
+
+  - id: sciencedb_brazilian_ssbs_fencing_subset
+    url: https://doi.org/10.57760/sciencedb.24779
+    status: local_only_cc_by_nc_nd_4_small_sensitive_subset
+    repository_policy: cache the source workbook and privacy-minimized five-row fencing subset locally; publish only code, hashes, counts, and claim boundaries
+    scope: five fencing rows within a 250-athlete Brazilian supplement-belief survey, with six scale items and no weapon or performance outcome
+    notes: The processed row table is not redistributed. Biological sex and detailed prescriber text are removed, age and practice duration are binned, and the five rows cannot support fencing-population or training-effect claims.
+
+  - id: uhra_fencing_scoping_review_catalog
+    url: https://doi.org/10.18745/ds.00026640
+    status: license_conflict_official_page_cc_by_nd_4_readme_claims_cc_by_local_normalization_only
+    repository_policy: cache the source and normalized row table locally; publish parser code, source links, checksums, attribution, and factual aggregates but not the normalized row-level derivative
+    scope: 445 quantitative fencing and wheelchair-fencing study records across performance, physiology, psychology, biomechanics, injury, health, and training-load domains; 437 parseable reported sample-size cells sum to 236,863 study-reported observations
+    notes: The official UHRA file page says CC BY-ND 4.0 while the deposited README says CC-BY, so the more restrictive statement governs publication. Reported sample-size totals can include overlapping cohorts, controls, repeated observations, or non-fencers and are never counted as acquired athletes or PisteFlow training rows.
+
+  - id: scientific_reports_personalized_strength_cai
+    url: https://doi.org/10.1038/s41598-025-29291-w
+    status: local_only_cc_by_nc_nd_4_privacy_sensitive
+    repository_policy: cache and analyze only locally; exclude raw and adapted row-level outputs from Git; publish code, hashes, counts, and claim boundaries only
+    scope: 21 fencers with chronic ankle instability randomized across control, standardized, and personalized six-week strength-training groups, with 1,512 before/after and profile measurement cells
+    notes: Weapon labels are absent; the workbook contains exact birth dates and five minors, so dates and row numbers are removed even from local processed tables.
+
+  - id: uhra_three_weapon_tibial_impact_lunges
+    url: https://doi.org/10.18745/ds.28796
+    status: usable_cc_by_anonymous_repeated_measures
+    repository_policy: cache the official workbook; publish processing code, hashes, attribution, aggregates, and privacy-minimized tables according to repository data policy
+    scope: 69 real competition-site fencers across all three weapons, 1,235 nonmissing retained lunge-impact values, and 413 participant-surface means over six piste conditions
+    notes: Five lunges were performed per surface but only three retained values are deposited after excluding extremes; tibial acceleration is an impact marker, not a measured injury outcome.
+
+  - id: plos_temporal_demands_elite_fencing
+    url: https://doi.org/10.1371/journal.pone.0285033
+    status: usable_cc_by_4_published_aggregate
+    repository_policy: cache article XML and the separate UHRA CC BY deposit; publish six modality benchmarks plus normalized bout/period summaries, checksums, and attribution
+    scope: 83 final-round bouts across three weapons and two genders at the 2014 World Championships, with 83 bout rows and 200 period rows deposited
+    notes: The article reports 5,900 Allez-to-Halte coded events, but those event rows are not deposited; source time headers say seconds although values are milliseconds and reproduce publication means only after division by 1,000.
+
+  - id: plos_fencing_flick_supplements
+    url: https://doi.org/10.1371/journal.pone.0222075
+    status: usable_cc_by_4
+    repository_policy: download all four supplements locally; publish a checksummed manifest and aggregate sheet inventory
+    scope: two real 650-fps foil-flick trials, one simulation, and computed variables from two fencers
+
+  - id: plos_fencing_lunge_simulator_video
+    url: https://doi.org/10.1371/journal.pone.0218959
+    status: usable_cc_by_4_supplementary_video
+    repository_policy: cache the supplementary video with checksum, attribution, and a one-asset manifest
+    scope: one 123.8-second 1080p demonstration video from a controlled lunge-simulator study
+    notes: The study reports 11 participants and 1,320 attacks, but those trial rows are not published and are not counted as acquired samples.
+
+  - id: kaggle_cc0_multi_sport_fencing_images
+    url: https://www.kaggle.com/datasets/sheikhzaib/sports-image-image-classification
+    status: usable_cc0_metadata_with_provenance_caveat
+    repository_policy: extract fencing images locally; publish hashes, manifests, aggregates, and provenance caveat
+    scope: 615 unique generic fencing still images within a 14,158-image, 22-sport archive
+    notes: The dataset card does not document per-image origins; images have no weapon, athlete, action, or bout labels.
+
+  - id: hmdb51_fencing_action_class
+    url: https://www.kaggle.com/datasets/nguyenbon/hmdb51
+    status: local_research_only_mixed_clip_rights
+    repository_policy: extract and train locally; publish hashes, manifests, aggregate metrics, and source-group splits; do not redistribute clips
+    scope: 116 broad fencing-action clips within the 51-class HMDB51 archive
+
+  - id: ucf101_fencing_action_class
+    url: https://www.crcv.ucf.edu/research/data-sets/ucf101/
+    status: local_research_only_terms_unverified_verified_mirror_bytes
+    repository_policy: use official split lists and selectively range-fetch the 111 Fencing members from a pinned 6.96 GB mirror ZIP; keep media local and publish hashes only
+    scope: 111 broad fencing-action clips across 25 source groups
+    notes: The downloader validates ZIP size, CRC-32, and AVI RIFF signatures. Clips have no epee/foil/sabre labels and must be group-split. The previous CRCV per-clip URL returned HTML and is rejected. The class mixes sport fencing, rapier or historical practice, stage combat, and film; it is not a three-weapon label source.
+
+  - id: youtube8m_fencing_video_level_memberships
+    url: https://research.google.com/youtube8m/explore.html
+    status: official_cc_by_4_metadata_and_features_underlying_media_link_only
+    repository_policy: publish the complete anonymous-ID membership, current official YouTube-ID mappings, current oEmbed availability, title-derived discovery hints, and cross-manifest overlap; do not download or redistribute underlying YouTube media
+
+  - id: osf_three_weapons_junior_world_cup_corpus
+    url: https://osf.io/jtb8h/
+    status: usable_cc_by_4_privacy_minimized_with_source_anomalies
+    repository_policy: cache the pinned archive locally; publish direct-name-free Parquet tables, processing code, hashes, attribution, and a complete contradiction audit
+    scope: 158,652 junior pool bouts across 474 competitions and all three weapons, plus 54,637 entry rows and 66,090 deposited ranking rows
+    notes: This is a third-party transcription of public FIE PDFs, not an official FIE export. Outcome training excludes 71 tied-score rows and one winner-score conflict. One ranking duplicate is removed, six same-name event collisions are flagged, unreliable age and birth-year fields are removed, and the author-held PDF-to-CSV parser is absent.
+
+  - id: osf_national_sabre_eye_tracking
+    url: https://osf.io/ynkx3/
+    status: public_download_unknown_license_sensitive_local_only
+    repository_policy: keep raw and privacy-minimized sample, event, and touch tables local; publish code, exact hashes, aggregates, and reconciliation diagnostics only
+    scope: main study with 623,397 eye-tracker rows from 10 national-level sabre fencers, 420 coded rows including 379 supervised touches, plus a 575-touch pilot from 14 participant labels
+    notes: Sensor rows are repeated 100-Hz samples, not independent athletes or touches. Main/pilot participant overlap is unresolved. Defensive participant aggregates do not fully recompute from the deposited touch rows, no video is deposited, and no reuse license is declared.
+
+  - id: osf_fencer_psychology_coping
+    url: https://osf.io/pa7fc/
+    status: public_download_unknown_license_psychologically_sensitive_local_only
+    repository_policy: keep raw and privacy-minimized rows local; publish code, hashes, scale counts, aggregate weapon counts, and anomaly flags only
+    scope: 78 fencers including 4 foil, 68 epee, and 6 sabre rows with training volume, perfectionism, coping, and psychological-inflexibility measures
+    notes: Cross-sectional self-report data are not diagnoses or training effects. Exact ages and dates plus deposited cluster labels are excluded; two weapon-code disagreements and four duration inconsistencies are flagged.
+
+  - id: osf_epee_attack_attention
+    url: https://osf.io/8bnqg/?view_only=438acf07f7b04e1a8671c5b6ce62b810
+    status: view_only_download_unknown_license_local_only
+    repository_policy: keep all source and row-level files local; publish acquisition code, exact hashes, counts, reconciliation diagnostics, and non-reconstructive aggregates only
+    scope: 24 adult epee participants, 24 attack-summary rows, and 144 COVAT condition-mean rows across beginner and advanced groups
+    notes: The 720 individual attack trials are described but not deposited. The advanced files use E1-E12 versus S1-S12; the local crosswalk is flagged as inferred from numeric suffixes and exact three-decimal mean reconciliation. This is cross-sectional laboratory data, not a training intervention or bout outcome.
+
+  - id: sensors_iot_balance_feedback_training
+    url: https://doi.org/10.3390/s23249801
+    status: usable_cc_by_4_repeated_measures_on_minors
+    repository_policy: cache the official supplement and keep participant rows local; publish parser code, pinned inner hashes, attribution, aggregate changes, and source-anomaly diagnostics
+    scope: 30 juvenile fencers in control, visual-feedback, and haptic-feedback groups, measured at Week 0 and Week 5 for 60 participant-time rows and 180 measurement cells
+    notes: The same 30 people generate both visits; weapon is not reported. Table S4 omits one printed mean, while derived Tables S10-S12 reverse or mistype values and mislabel haptic headings, so only the 60 raw rows in Tables S1-S6 are parsed.
+
+  - id: plos_fencer_cognition_fitness_blood
+    url: https://doi.org/10.1371/journal.pone.0251907
+    status: usable_cc_by_4_privacy_minimized_health_panel
+    repository_policy: cache both official workbooks; keep the joined direct-code-free row table local and publish code, hashes, attribution, counts, and the upstream outlier flag
+    scope: 18 fencers with fitness, cognitive-task, and basal/post blood measures
+    notes: Weapon is absent and repeated pre/post columns are not extra participants. Exact study codes and ages are removed; the source-styled F2 post-CTSB outlier is retained with a flag.
+
+  - id: plos_elite_fencer_back_pain_subset
+    url: https://doi.org/10.1371/journal.pone.0180130
+    status: usable_cc_by_4_privacy_minimized_self_report
+    repository_policy: cache the official SPSS file and keep the 23-row fencer table local; publish code, hashes, attribution, aggregates, and claim boundaries
+    scope: 23 elite fencers within a 1,280-row German athlete/control survey, with training volume, cadre, pain periods, and pain intensity
+    notes: Weapon is absent and outcomes are self-reported, not diagnoses. All 23 report lifetime back pain, so the subset cannot train an ever-injured versus never-injured classifier. Exact age, height, weight, and experience years are removed or coarsened.
+    scope: 346 official May 2018 video-level memberships for the broad Fencing label /m/02y8z
+    notes: The CC BY 4.0 license covers YouTube-8M labels and precomputed features, not the linked videos. Membership is machine-generated and has no weapon, athlete, bout, touch, action, or frame-level ground truth. Public-link availability is not media licensing.
+
+  - id: kinetics_fencing_annotation_memberships
+    url: https://github.com/cvdfoundation/kinetics-dataset
+    status: official_annotation_metadata_link_only
+    repository_policy: publish YouTube IDs, intervals, release membership, and overlap counts; do not download or redistribute videos
+    scope: fencing-labelled intervals in Kinetics-400, Kinetics-600, and Kinetics-700-2020
+    notes: Release rows overlap and have no weapon labels; unique clip intervals must be reported separately.
+
+
+  - id: wikidata_fencer_registry
+    url: https://www.wikidata.org/wiki/Q13381863
+    status: usable_cc0_structured_data
+    repository_policy: include normalized identity manifest with source links and a CC0 notice
+    scope: 7,283 human items with an explicit fencing-athlete occupation or sport-fencing statement, including 6,783 birth years, 2,036 heights, 1,802 weights, and 1,703 P18 memberships
+    notes: Non-human and fictional entities are excluded. Sport-only and occupation-only membership routes remain separate. Identity metadata is not a current ranking, ability measurement, or active-status claim.
+
+  - id: wikidata_fencer_commons_images
+    url: https://www.wikidata.org/wiki/Property:P18
+    status: usable_open_subset_after_per_file_license_resolution
+    repository_policy: publish image-to-athlete memberships and attribution; download bounded thumbnails only for files with a recognized open Commons license
+    scope: 1,669 Commons-image records from the filtered fencer registry, including 1,664 license-open records and 594 locally verified unique SHA-256 thumbnails after Commons-category reuse
+    notes: P18 association is not PisteFlow pixel verification; portraits and event images are not action, bout, touch, weapon, or skill labels. Shared files remain one image with multiple athlete memberships, and 1,071 unresolved network failures remain explicit rather than counted as acquired media.
+
+  - id: womensports_fencing_images
+    url: https://doi.org/10.17632/m39ymdv48s.3
+    status: local_analysis_only_third_party_rights_unresolved
+    repository_policy: extract only the Fencing class locally; publish code, source links, checksums, counts, and aggregate audits, not image files
+    scope: 204 broad Fencing-class JPEGs from a women-sport classification archive
+    notes: Dataset-level CC BY 4.0 does not resolve possible third-party image rights. Weapon, athlete, event, action, touch, and bout labels are absent. The deposited archive has 12,666 total files while the later paper reports 33,504 images.
+
+  - id: physionet_actes_fencer_cardio
+    url: https://doi.org/10.13026/2qs3-kh43
+    status: local_analysis_only_sensitive_open_data
+    repository_policy: retain privacy-minimized participant profiles and beat-level rows locally; publish code, pinned checksums, and aggregates
+    scope: 10 teenage national-division fencers and 27,603 graded-exercise beat-level observations within an 18-athlete dataset
+    notes: Weapon is absent. Exact age and source participant ID are removed. Rows group by participant. The documented VO2 unit conflicts with the numeric scale and is not silently converted.
+
+  - id: ncaa_championship_results_archive
+    url: https://ncaa.escrimeresults.com/
+    status: local_analysis_only_all_rights_reserved
+    repository_policy: cache raw pages and row-level Parquet locally; publish only code, hashes, and aggregates
+    scope: six gender-weapon championship score matrices for listed years from 2000 onward
+    notes: Public factual results are not represented as openly licensed or redistributed by this project.
+
+  - id: british_fencing_international_performance_archive
+    url: https://www.britishfencing.com/international-results-raw-data-archives/
+    status: local_analysis_only_no_explicit_reuse_license
+    repository_policy: cache official public views and a name-free pseudonymous row table locally; publish code, hashes, and aggregates only
+    scope: nine distinct weapon-season tables for 2021-22 through 2023-24 covering GBR international athlete-event performance
+    notes: Stable IDs are pseudonymous, not anonymous; do not publish row-level athlete trajectories or infer selection causality.
+
+  - id: wikimedia_commons_fencing_video
+    url: https://commons.wikimedia.org/wiki/Category:Videos_of_fencing
+    status: usable_open_subset
+    repository_policy: include manifest and derivatives; download only license-verified rows
+    notes: Per-file licenses and attribution are authoritative.
+
+  - id: fencing_footwork_dataset
+    url: https://home.agh.edu.pl/~fmal/ffd/
+    status: reported_dataset_not_acquired_archive_signin_gated_license_unresolved
+    repository_policy: retain the landing page and reported schema as a lead only; do not count, train on, or redistribute rows unless archive access and an explicit data license are independently resolved
+    scope: landing page reports 10 fencers, 6 footwork actions, and 652 skeleton/depth/IMU samples with no RGB; the current Google Drive archive redirects to sign-in and was not acquired
+
+  - id: oman_fencing_public_api
+    url: https://fencing.om/developers
+    status: public_api_no_auth
+    repository_policy: fetch on demand; cache ignored; publish schema and aggregate outputs
+    notes: API documentation states open, unauthenticated, CORS-enabled access; no data license is asserted here.
+
+  - id: recent_mens_sabre_event_snapshots
+    url: https://github.com/KahHongg/Fencing_win_and_score_predictor
+    status: local_analysis_only_no_repository_license
+    repository_policy: keep source CSVs and name-free bout rows local; publish code, hashes, and aggregate validation only
+    scope: six 2023-2024 men's-sabre events with athlete, pool, elimination, and final-ranking tables
+    notes: This adds recent sabre event coverage beyond the pinned 2014-2021 foil snapshot; it is not a live or official FIE feed.
+
+  - id: askfred_us_fencing_population_snapshot
+    url: https://github.com/wesleyyuan17/us-fencing-population-study
+    status: local_analysis_only_no_repository_license
+    repository_policy: keep source and name-free participation rows local; publish code, hashes, and aggregate audits only
+    scope: AskFRED-derived event-result entries from 2002-2022 across all three weapons
+    notes: Upstream explicitly warns this is incomplete, skewed toward senior/open events, and pandemic-distorted; never call it a membership census.
+
+  - id: askfred_v1_round_result_archive
+    url: https://github.com/boscojwho/askFRED-v1-archive
+    status: local_analysis_only_no_repository_or_underlying_data_license
+    repository_policy: keep the 2.106 GB pinned archive and 5,198,663 name-free normalized bout rows local; publish parser code, snapshot hashes, exact aggregates, and integrity exclusions only
+    scope: 192,533 unique historical round objects, 5,198,663 unique bout records, and 127,546 pseudonymous competitors; 4,898,768 individual outcome-eligible bouts include 1,805,692 epee, 1,924,073 foil, and 1,169,003 sabre bouts
+    notes: This is a frozen, incomplete community archive of the deprecated AskFRED v1 public API, not an official or live USA Fencing feed. Missing pages are not reconstructed; byes, placeholders, ties, nonstandard statuses, team records, unknown weapons, and score-status conflicts remain auditable but are excluded from outcome training.
+
+  - id: fencingtracker_community_2024_bouts
+    url: https://github.com/benakc/fencing
+    status: local_analysis_only_no_repository_or_dataset_license
+    repository_policy: keep the pinned source and 261,803 name-free normalized bout rows local; publish parser code, checksums, exact aggregate audits, and training exclusions only
+    scope: calendar-2024 FencingTracker histories with 261,803 unique pool and direct-elimination bouts, 3,701 event instances, and 16,318 pseudonymous athletes; 261,485 decisive model-eligible bouts include 101,492 epee, 89,598 foil, and 70,395 sabre bouts
+    notes: This third-party public snapshot is not an official USA Fencing feed or complete census. Names, clubs, birth years, raw IDs, event titles, Elo values, and probability fields are excluded; reporter-side orientation must be randomized inside grouped folds.
+
+  - id: harvard_dataverse_usafencing_clubs
+    url: https://doi.org/10.7910/DVN/AN2RB5
+    status: usable_cc0_public_club_geography
+    repository_policy: cache the version-1 workbook and README; publish a direct-name-free club geography table, code, hashes, attribution, and aggregate audits
+    scope: 589 public USA Fencing club records with organizational fields, weapon and para specialties, divisions, regions, addresses, websites, and geocoded coordinates
+    notes: Club rows are not athletes, memberships, training sessions, or outcomes. Published analytics remove club names, source IDs, slugs, street addresses, URLs, and map links; upstream geocodes are not field-verified.
+
+  - id: few_shot_world_level_epee_moves
+    url: https://github.com/d-mali/fie-epee-moves-clasificator
+    status: local_analysis_only_no_repository_license
+    repository_policy: keep clips, point-tracking arrays, annotations, and any weights local; publish code, hashes, and aggregate audit only
+    scope: 130 epee movement clips across seven classes from 61 source-video groups
+    notes: Split by source video, not clip. Numeric upstream attributes are retained without inventing referee-call or anatomical semantics.
+
+  - id: hzume_epee_temporal_action_annotations
+    url: https://github.com/hzume/epee-action-recognition
+    status: local_analysis_only_no_repository_license_source_media_absent
+    repository_policy: keep annotation JSON, row-level derivatives, filenames, and models local; publish parser code, hashes, aggregate counts, and limitations only
+    scope: 105 temporal side/action/outcome annotation rows across 21 annotated epee video references, plus one unannotated video reference
+    notes: The 22 referenced source videos are not bundled, and annotation protocol and rater agreement are undocumented. Overlapping left/right rows share time ranges, so row-duration sums are never presented as unique video duration.
+
+  - id: prod_ric_fencing_action_videos
+    url: https://github.com/prod-ric/fencing-mlproject
+    status: local_analysis_only_readme_only_license_statement
+    repository_policy: keep all videos, frames, pose derivatives, row-level metadata, and models local; publish the pinned adapter, hashes, aggregate audit, and limitations only
+    scope: 7 original videos and 157.9 reported seconds; 5 directory-labelled footwork demonstrations and 2 unlabelled Olympic epee broadcast clips
+    notes: Visual audit finds at least three distinct training demonstrators and groups repeated demonstrators together; the two broadcast clips share one bout group. The README's 97.14% sequence-split result is not adopted, idle has no bundled clip, and cutting videos into overlapping windows does not create independent samples.
+
+  - id: fencstats_sabre_media_snapshot
+    url: https://github.com/JanVDB2000/FencStats-AI-Powered-Fencing-Analyzer
+    status: local_analysis_only_no_repository_or_broadcast_license
+    repository_policy: keep all video and image bytes, row-level inventories, derivatives, and models local; publish the pinned adapter, hashes, aggregate counts, and source-group audit only
+    scope: 5 original sabre broadcast excerpts and 9 original sabre stills across 9 conservative visual source groups
+    notes: Two video files show the same Xu Yingming–Vu Thanh An bout, one Kim–Navarro still overlaps a bundled video, and repeated still frames remain in their parent bout group. Visible scoreboard names support grouping but are not a verified athlete-identity dataset.
+
+  - id: theephop_foil_media_snapshot
+    url: https://github.com/TheephopWS/fencing-ai
+    status: local_analysis_only_mit_code_broadcast_rights_unverified
+    repository_policy: keep the original and processed video, frames, pose data, and models local; publish the MIT adapter code, hashes, aggregate audit, and one source-group boundary
+    scope: 1 original 3.650333-second foil broadcast excerpt plus 1 shorter pose-overlay derivative from the same Macchi–Itkin source group
+    notes: The top-level MIT license covers repository code but does not document rights to the underlying broadcast. The processed file is not a second bout and its automatic pose or attack overlay is not ground truth.
+
+  - id: tennis_ball_epee_video_tool_snapshot
+    url: https://github.com/Tennis-Ball/Fencing-Video-Tool
+    status: local_training_only_no_repository_or_broadcast_license
+    repository_policy: keep all videos, binary-labelled frames, row-level inventories, and models local; publish the pinned adapter, hashes, aggregate counts, and bout-group audit only
+    scope: 4 original full epee bout videos totaling 3,774.739612 seconds, 1 filtered derivative video, and 313 manually classified downscaled frames from one of the four bouts
+    notes: The 313 frame labels contain 205 fencing-visible and 108 fencing-not-visible examples but form one source group, not 313 independent bouts. The filtered output and every downscaled frame inherit the video144p bout group; group-isolated evaluation is mandatory.
+
+  - id: g1_moves_generic_fencing_motion
+    url: https://huggingface.co/datasets/exptech/g1-moves
+    status: usable_cc_by_4_adjacent_motion_pretraining
+    repository_policy: cache the exact two-clip subset and publish its compact motion audit with attribution; never present it as weapon-specific competition or athlete-performance data
+    scope: 2 fencing-named motion clips with 2,258 60-Hz BVH frames, 2,256 retargeted training frames, 51-joint capture skeletons, 29 robot degrees of freedom, and 30-body forward-kinematics arrays
+    notes: Both clips remain one conservative performer group. The pinned root manifest says Maya Coro while both per-clip READMEs say Mitch Chaiet, so performer identity is unresolved. No epee, foil, sabre, bout, action, touch, score, competition, or verified-athlete label is available.
+
+  - id: lerobot_fencing_interaction
+    url: https://huggingface.co/datasets/ashishrao7/fencing-lerobot-realsense-depth-and-selfie-cam
+    status: local_analysis_only_no_dataset_license
+    repository_policy: pin and checksum the small video/parquet snapshot locally; publish aggregate audit only
+    scope: three robot-imitation episodes, 872 synchronized frames, three camera streams, and six-motor state/action arrays
+    notes: Adjacent human-robot interaction data only; not competition, athlete-performance, weapon, or referee ground truth.
+
+  - id: fencing_vision_coco_pre_dataset
+    url: https://github.com/Ph1n-Pham/fencing-vision
+    status: local_analysis_only_ambiguous_media_rights
+    repository_policy: keep the eight images and row-level COCO derivatives local; publish validation code and aggregate audit only
+    scope: 8 annotated frames, 64 COCO instances, 6 source-image families, and six used classes covering body parts, strip, scoreboard, weapon, and point
+    notes: The COCO file embeds MIT, but the repository lacks a top-level license and source-footage provenance; never present this as a general benchmark.
+
+  - id: fencevision_blade_localization
+    url: https://universe.roboflow.com/ahs-workspace-2qhtk/my-first-project-gg3o7/dataset/3
+    status: local_training_cc_by_4_with_broadcast_provenance_caveat
+    repository_policy: keep images local; publish the exact-commit adapter, hashes, source-group manifest, and aggregate audit
+    scope: 2,399 exported foil frames with 2,910 blade boxes, collapsing to 1,000 original frames from five real source videos
+    notes: The embedded data.yaml says CC BY 4.0, but the parent repository has no top-level license and does not document underlying broadcast rights. All five source videos span the upstream image splits, so evaluation must hold out complete source videos.
+
+  - id: roboflow_universe_fencing_candidate_catalog
+    url: https://universe.roboflow.com/search?q=class%3Afencing
+    status: public_metadata_catalog_exports_login_gated
+    repository_policy: publish the reviewed project/version metadata and source links; do not count images, versions, augmentations, forks, or models as acquired until an exact export is pinned and member-level hashes are audited
+    scope: 21 sport-fencing or closely adjacent Roboflow project/version leads covering fencers, en-garde posture, blades, guards, scoreboards, strips, left/right players, epee items, and sabre objects
+    notes: Several projects are likely forks or version lineages, generated versions include augmentation, page counts use different units, and unknown-license projects remain unusable. The catalog is a discovery queue, not 21 independent datasets or a training total.
+
+  - id: kaggle_sport_fencing_matches_ai
+    url: https://www.kaggle.com/datasets/alexpgd/sport-fencing-matches-ai
+    status: optional_local_only_unknown_license
+    repository_policy: do not redistribute
+    scope: 9,370 labeled 75-frame foil clips from 1,332 source videos, with tracked and raw OpenPose JSON; 42 duplicate source-video windows are excluded
+    notes: Kaggle metadata reports an unknown license. Keep the archive, row-level features, and trained weights local; group evaluation by hashed source-video ID and do not claim athlete-independent generalization.
+
+  - id: kaggle_usa_fencing_team_archives
+    url: https://www.kaggle.com/datasets/ajaxofgreee/usa-fencing-team-archives
+    status: local_analysis_only_unknown_license
+    repository_policy: keep the archive and name-free row table local; publish code, exact hashes, aggregates, and data-quality flags only
+    scope: 78,883 ranking snapshots across 18 sex/weapon/age-category files, 2010-2023, covering foil, epee, and sabre
+    notes: The 7,504 series are category-specific published-name spellings, not verified unique people. Do not merge dirty spellings, claim a current official feed, or treat ranking changes as causal training outcomes.
+
+  - id: kaggle_historical_womens_foil_panel
+    url: https://www.kaggle.com/datasets/amichaelsen/fie-fencing-womens-foil-data
+    status: local_analysis_only_upstream_rights_caveat
+    repository_policy: keep all row tables local; publish code, exact hashes, aggregates, and exclusion counts only
+    scope: 2,108 deidentified athlete bios, 10,937 cross-weapon ranking rows, 218 tournament rows, and 49,131 foil pool bouts through May 2021
+    notes: Kaggle metadata declares CC0, but the rows came from FIE pages. The bout rows overlap the pinned historical foil corpus and are audited but not counted or trained twice; 532 repeated ranking rows are excluded after first occurrence.
+
+  - id: activitynet_doing_fencing_intervals
+    url: https://activity-net.org/download.html
+    status: annotation_metadata_link_only_media_rights_not_asserted
+    repository_policy: publish the pinned annotation subset, links, hashes, and overlap audit; do not download or redistribute linked media
+    scope: 169 real public-video fencing intervals from 76 source videos, totaling 1.791 hours
+    notes: ActivityNet labels the broad activity only. Weapon, athlete, touch, and bout labels are absent, and complete source videos must be held out together.
+
+  - id: hacs_fencing_intervals
+    url: https://github.com/hangzhaomit/HACS-dataset
+    status: usable_bsd3_annotation_metadata_link_only_media
+    repository_policy: publish the pinned fencing annotation subset, hashes, source links, and overlap audit; do not redistribute linked media
+    scope: 6,457 merged positive intervals from 2,243 source videos, totaling 9.589314 hours, plus 1,701 sparse hard-negative clips
+    notes: Dense segments and sparse clips overlap and are never added as independent samples. HACS has no epee, foil, sabre, athlete, touch, or bout labels; 13 dense intervals extend beyond reported source duration and remain flagged.
+
+  - id: egohumans_fencing_multiview_pose
+    url: https://rawalkhirodkar.github.io/egohumans/
+    status: usable_cc_by_nc_sa_2_multiview_pose
+    repository_policy: keep the pinned benchmark and local sequence data with attribution; publish compact manifests and grouped analysis
+    scope: 19,928 ego-RGB frames, 29,192 person instances, 493,021 observed 2D keypoints, and 496,264 3D keypoints across 35 views and 13 annotated fencing sequences, plus five locally verified synchronized preview stills from one scene
+    notes: Three camera aliases are not three verified athletes, and five camera-view previews are not five bouts. Weapon, touch, score, and bout labels are absent; all views and frames from one capture sequence remain in one split. Four official demo videos remain link-only.
+
+  - id: fencingly_pose_sequences
+    url: https://huggingface.co/datasets/EXCALOFRIO/FENCINGLY
+    status: local_training_apache2_card_with_undocumented_media_provenance
+    repository_policy: keep archives, row features, and models local; publish hashes, exact deduplication results, and aggregate audits
+    scope: 28,727 exact-unique pose sequences and 1,024,578 retained frames after collapsing 22,399 duplicate file copies
+    notes: The card does not document original videos, athletes, weapons, events, annotation protocol, or whether left/right means scorer, winner, referee call, or another task. Transformation-equivalent groups stay together, and sequence counts are not athlete counts.
+
+  - id: mfad_multimodal_fencing_actions
+    url: https://github.com/EMRGSZU/MFAD
+    status: local_training_only_no_repository_license
+    repository_policy: keep raw skeleton, IMU, row-level derivatives, and trained artifacts local; publish code, hashes, aggregate counts, and grouped evaluation
+    scope: 27 author-coded participants, 928 depth-skeleton action sequences, 78,658 skeleton time steps, and 1,693 hand/foot IMU stream segments
+    notes: Athlete level labels are upstream labels rather than independently verified classifications. Weapon, sex, age, handedness, and outcomes are absent; participant groups must be held out intact.
+
+  - id: mpii_fencing_pose_images
+    url: https://www.mpi-inf.mpg.de/de/departments/computer-vision-and-machine-learning/software-and-datasets/mpii-human-pose-dataset
+    status: local_research_images_mpii_annotation_terms
+    repository_policy: keep source images and image-derived artifacts local; publish annotation-derived metadata, hashes, attribution, and grouped results
+    scope: 54 real fencing frames from 7 public source videos, with 102 person annotations and 1,442 2D keypoints; title evidence identifies 4 epee, 3 foil, 26 sabre, and 21 weapon-unknown frames
+    notes: MPII permits research use of annotations and code but does not own source-image copyright. Weapon labels are source-title context rather than pixel-level action labels; frames from one video remain grouped.
+
+  - id: openimages_fencing_image_labels
+    url: https://storage.googleapis.com/openimages/web/download_v7.html
+    status: usable_cc_by_4_annotations_cc_by_2_joined_images
+    repository_policy: publish the six-class manifest, split memberships, image-level attribution, hashes, and aggregate audits; retain downloaded image bytes locally
+    scope: 5,540 target images, including 646 human-positive images and 4,894 negative-only hard candidates; 561 positive image files acquired at the latest completed snapshot
+    notes: The 1,503 positive label rows are not independent images. Only 274 images have exactly one positive epee, foil, or sabre label, 183 are multi-weapon ambiguous, and 189 have no specific weapon label. Labels are image-level, not actions, athletes, bouts, or boxes.
+
+  - id: wikimedia_commons_three_weapon_stills
+    url: https://commons.wikimedia.org/wiki/Category:Fencing
+    status: usable_open_subset_per_file_license
+    repository_policy: publish the controlled-category manifest, per-file attribution, hashes, and aggregate audits; acquire only license-verified originals
+    scope: 2,007 discovered Commons source files across controlled epee, foil, and sabre branches; 2,005 have recognized open licenses and declare 10,780,771,436 total bytes
+    notes: All 2,005 open-license rows have locally verified 1,280-pixel thumbnails, resolving to 2,004 unique SHA-256 values. Category-path weapon candidates are weak contextual labels, not pixel-reviewed action labels; sixteen multi-root files remain ambiguous, and source files are not athlete or independent-action counts.
+
+  - id: fencing_reference_scoreboard_delta_intervals
+    url: https://github.com/sholtodouglas/fencing_ref_dataset
+    status: local_analysis_only_no_repository_license_linked_media_not_acquired
+    repository_policy: keep row features and any future models local; publish source-video links, hashes, deduplication, overlap, and aggregate audits
+    scope: 14,915 automatic four-second left, right, or together scoreboard-delta intervals from 1,761 public source videos; 1,093 videos are new beyond Fencing Matches AI
+    notes: Automatic deltas are not verified referee decisions, right-of-way calls, or touch correctness. Every validation video also appears in the upstream train split, so only new complete source-video group splits are permitted.
+
+  - id: asmi_referee_side_label_clips
+    url: https://github.com/asmisawant/fencing-ai-referee
+    status: local_training_only_no_repository_license
+    repository_policy: keep media, row features, and models local; publish code, snapshot hashes, exact counts, and source-grouped evaluation
+    scope: 395 decodable two-second clips across 55 filename-derived source groups with left, right, or simultaneous directory labels
+    notes: The snapshot does not contain the README's approximate 1,700 clips. Labels are not independently verified referee decisions, and clip-level weapon, source URL, event, athlete, and provenance are absent.
+
+  - id: korean_fencing_tracker_reports
+    url: https://github.com/AI-BZ/KoreanFencingTracker
+    status: local_analysis_only_unlicensed_automatic_reports_link_only_video
+    repository_policy: publish public video links, parser code, hashes, and aggregate audits; keep automatic row tables local and do not download broadcast media
+    scope: 78 canonical public-video reports across 23 epee, 25 foil, 29 sabre, and 1 unknown video, producing 1,037 automatic score-change rows over 1,640,367 analyzed frames
+    notes: Touch, action, phrase, and priority values are all automatic and have zero human-reviewed rows. Sixty-three canonical reports are marked truncated, seven action event keys conflict between report variants, and source media are not bundled.
+
+  - id: korea_gkl_wheelchair_fencing_results
+    url: https://www.data.go.kr/data/15048179/fileData.do
+    status: usable_korean_public_data_portal_unrestricted_privacy_minimized_rows
+    repository_policy: cache the pinned official CSV; publish direct-name-free event and placement tables, parser code, hashes, attribution, exact aggregates, and source-date discrepancy
+    scope: 77 wheelchair-fencing event or training entries dated 2016-2026 and 458 parsed placement rows across epee, foil, and sabre for one Korean corporate team
+    notes: Four direct athlete names are replaced with stable project-local codes. Placements are not bouts, scores, touches, independent athletes, or causal training outcomes. The portal description says 2016-2024, while the downloaded file contains 2025 and 2026 rows.
+
+  - id: saberpredict_timestamp_windows
+    url: https://github.com/MistakesWereMaed/SaberPredict
+    status: local_analysis_only_no_repository_or_footage_license
+    repository_policy: publish the link and timestamp manifest, hashes, and grouped audits; do not download or redistribute source video
+    scope: 250 side-labelled sabre timestamp windows from 10 annotated source videos plus 12 additional video links
+    notes: All 22 source videos already occur in the broader FIE YouTube catalog, so only timestamp annotations are additive. Side labels are not independently verified right-of-way or referee decisions.
+
+  - id: spws_veterans_rankings_and_events
+    url: https://github.com/Fencer4Life/spws-automated-ranklist
+    status: local_analysis_only_no_repository_or_dataset_license
+    repository_policy: keep workbooks and pseudonymous athlete-level rows local; publish code, hashes, aggregate counts, and conflict flags
+    scope: 1,075 final-ranking memberships and 12,033 deduplicated athlete-event placement rows across epee, foil, and sabre from 139 canonical workbooks
+    notes: The 1,914 normalized spelling keys are not verified unique people. Thirty backup files, 15 derivative workbooks, and 164 duplicate event rows are not counted independently; one event-point conflict remains flagged.
+
+  - id: kaggle_fie_2021_22_global_rankings
+    url: https://www.kaggle.com/datasets/sethlogan/fie-fencer-rankings-end-of-20212022-season
+    status: local_analysis_only_unknown_license_upstream_rights_caveat
+    repository_policy: keep workbook, names, row-level tables, and models local; publish parser code, hashes, totals, and integrity checks
+    scope: 3,410 end-of-season ranking rows and 9,978 event-point rows across all six gender-weapon sheets, with 3,390 spelling-country identity keys
+    notes: The dataset license is unknown and rows appear derived from FIE pages. Identity keys are not verified people; 525 parenthesized event-point rows are excluded from totals, and all reported totals reconcile exactly.
+
+  - id: fencingstatsnz_results_snapshot
+    url: https://github.com/nolanpetersonnz/FencingStatsNZ
+    status: local_analysis_only_underlying_results_rights_unverified
+    repository_policy: keep source and pseudonymous row tables local; publish MIT parser code, hashes, aggregate audits, and grouped validation
+    scope: 18,541 name-free bouts from 180 New Zealand event instances, 2024-2026, including 8,908 epee, 6,282 foil, and 3,351 sabre rows
+    notes: This public-results snapshot is not a complete population census or official live feed. Eight tied-score anomalies and 19 withdrawals remain auditable but are excluded from predictive evaluation.
+
+  - id: february_nac_2026_junior_mens_foil
+    url: https://github.com/eax2101-droid/fencing-hot-hand-data-pipeline
+    status: local_analysis_only_no_repository_or_data_license
+    repository_policy: keep source and pool-pseudonymous rows local; publish parser code, hashes, integrity corrections, and aggregate results
+    scope: 273 unique Junior Men's Foil pool bouts reconstructed from 546 mirrored perspective rows across 13 pools and 91 pseudonymous athletes
+    notes: Each bout occurs twice upstream and is counted once. One V3 touches-scored field and 274 winner-side margin fields are corrected from paired cells; this one event cannot establish a causal hot-hand effect or broad athlete generalization.
+
+  - id: regional_tournament_direct_elimination_ledgers
+    url: https://github.com/aidanKnox/Fencing-Data-Analytics-Project
+    status: local_analysis_only_restricted_portfolio_license_real_individuals
+    repository_policy: keep source CSVs, names, pseudonymous rows, and models local; publish only code, pinned hashes, aggregate counts, and data-quality findings
+    scope: 148 direct-elimination ledgers and 148 rosters, yielding 3,728 scored bouts, 118 walkovers, and 4,083 roster memberships, primarily from 2024-2026
+    notes: The source contains real individuals but no weapon field, so every row remains weapon-unknown and is excluded from three-weapon comparisons. Five tied-score anomalies remain flagged.
+
+  - id: zenodo_wheelchair_fencing_training_aggregates_2026
+    url: https://doi.org/10.5281/zenodo.21195576
+    status: usable_cc_by_4_published_group_aggregates
+    repository_policy: cache both publisher PDFs and publish the 62 extracted aggregate rows, code, hashes, attribution, and discrepancy flags
+    scope: two likely same-cohort wheelchair-fencing intervention papers with 62 group-aggregate rows, 20 metrics, and at most 14 distinct participants
+    notes: Weapon is not reported and participant rows are unavailable. The papers are not added as 28 independent athletes; six printed change groups differ by more than 0.25 percentage points from recomputed relative change.
+
+  - id: facts_fencing_actions
+    url: https://arxiv.org/abs/2412.16454
+    status: superseded_by_verified_repository_entry_above
+    repository_policy: retained only as the paper citation; use facts_fine_grained_fencing_actions for the audited release
+    notes: The paper's anonymous repository and Dropbox distribution were verified on 2026-08-14; the release still has no dataset license.
+
+  - id: fie_results_and_video
+    url: https://fie.org/terms-and-conditions
+    status: restricted_link_only
+    repository_policy: do not scrape, store, or redistribute without written permission
+
+  - id: historical_fie_foil_pool_bouts_gpl_snapshot
+    url: https://github.com/amichaelsen/fie-fencing-dataset
+    status: pinned_gpl3_snapshot_local_row_analysis
+    repository_policy: use the pinned 2021 repository snapshot locally; publish code, hashes, and aggregates only; do not refresh from FIE
+    scope: 115,238 men's and women's foil pool bouts dated 2014-2021
+    notes: The snapshot contains implausible upstream ages and 0-0 rows; preserve and flag them. Current FIE pages remain restricted link-only.
+
+  - id: fencing_points_mens_foil
+    url: https://www.kaggle.com/datasets/foillee/fencing-points
+    status: usable_mit_snapshot_with_source_caveat
+    repository_policy: cache and analyze a deidentified row table locally; publish code, hashes, and aggregates
+    scope: 30,808 senior men's foil points-event rows from 2007-2025
+    notes: This is a third-party snapshot rather than an official current ranking feed; direct identity fields are removed.
+
+  - id: fencing_tv
+    url: https://fencingtv.com/videos
+    status: public_viewing_link_only
+    repository_policy: store landing-page links only; no media download or redistribution
+
+  - id: fie_youtube
+    url: https://www.youtube.com/@FIEvideo
+    status: public_viewing_link_only
+    repository_policy: store links/IDs only unless a particular item has a verified reusable license
+
+  - id: youtube_fencing_focused_channels
+    url: https://www.youtube.com/
+    status: public_viewing_link_metadata_only
+    repository_policy: enumerate public uploads as IDs, titles, source links, durations, and weak title labels; never download or redistribute media without item-level permission
+    scope: 89,288 unique public viewing links from 113 sport-fencing-focused channels plus 31 targeted searches in multisport, collegiate, archive, para-sport, and regional channels, with 77,015.65 hours of duration metadata; title-derived labels identify 8,871 epee, 8,522 foil, 8,917 sabre, and 62,978 weapon-unknown links
+    notes: YouTube IDs are unique links, not content-hash-unique bouts, independent athletes, licensed training files, or reviewed labels. Different uploaders may post the same underlying footage; publisher-role metadata is not an item-level media-rights grant.
+
+  - id: openverse_non_wikimedia_fencing_stills
+    url: https://openverse.org/
+    status: local_weak_context_training_open_license_index_with_upstream_verification_caveat
+    repository_policy: keep image previews local; publish query code, upstream links, attribution, licenses, hashes, deduplication, groups, and aggregate audits
+    scope: 271 locally verified, exact-hash-unique image previews from 70 English and multilingual sport-fencing queries across 71 creator groups, excluding Wikimedia because Commons is audited separately
+    notes: Openverse warns that indexed license metadata can be inaccurate. Query context is not pixel review, weapon truth, athlete identity, action, bout, touch, or skill truth; exact byte duplicates count once and creator-level groups stay intact.
+
+  - id: library_of_congress_historical_fencing_images
+    url: https://www.loc.gov/photos/?q=fencing
+    status: historical_context_only_item_rights_screened
+    repository_policy: acquire only exact-subject records whose item page states no known restrictions or public domain; publish source links, rights text, hashes, groups, and aggregate audits
+    scope: historical photographs, prints, and drawings with the exact Library of Congress subject heading Fencing
+    notes: Historical catalog context is not modern weapon, athlete, action, bout, touch, score, or performance truth; collection groups remain intact and uncertain-rights items are excluded.

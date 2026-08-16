@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-labelledby="title desc">
+  <title id="title">PisteFlow evidence pipeline</title>
+  <desc id="desc">Public sources flow through rights and integrity checks into three analytics tracks and aggregate reports.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#081321"/>
+      <stop offset="1" stop-color="#102a43"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#173a57"/>
+      <stop offset="1" stop-color="#10283e"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#68d5ff"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="360" rx="22" fill="url(#bg)"/>
+  <text x="56" y="54" fill="#f4fbff" font-family="Inter,Arial,sans-serif" font-size="27" font-weight="700">From public evidence to bounded analytics</text>
+  <text x="56" y="82" fill="#9fc4d9" font-family="Inter,Arial,sans-serif" font-size="15">Every row keeps a source, rights state, checksum, grouping rule, and claim boundary.</text>
+
+  <g font-family="Inter,Arial,sans-serif">
+    <rect x="55" y="118" width="235" height="142" rx="16" fill="url(#card)" stroke="#2c6489"/>
+    <text x="79" y="150" fill="#70d7ff" font-size="13" font-weight="700">01 · DISCOVER</text>
+    <text x="79" y="181" fill="#ffffff" font-size="20" font-weight="700">Public sources</text>
+    <text x="79" y="210" fill="#b7d0df" font-size="14">Results · videos · studies</text>
+    <text x="79" y="233" fill="#b7d0df" font-size="14">APIs · supplements · archives</text>
+
+    <rect x="325" y="118" width="235" height="142" rx="16" fill="url(#card)" stroke="#2c6489"/>
+    <text x="349" y="150" fill="#70d7ff" font-size="13" font-weight="700">02 · VERIFY</text>
+    <text x="349" y="181" fill="#ffffff" font-size="20" font-weight="700">Evidence gate</text>
+    <text x="349" y="210" fill="#b7d0df" font-size="14">License · hash · schema</text>
+    <text x="349" y="233" fill="#b7d0df" font-size="14">Dedup · privacy · split groups</text>
+
+    <rect x="595" y="118" width="280" height="142" rx="16" fill="url(#card)" stroke="#2c6489"/>
+    <text x="619" y="150" fill="#70d7ff" font-size="13" font-weight="700">03 · ANALYZE</text>
+    <text x="619" y="181" fill="#ffffff" font-size="20" font-weight="700">Three evidence tracks</text>
+    <text x="619" y="210" fill="#b7d0df" font-size="14">Competition · video / pose</text>
+    <text x="619" y="233" fill="#b7d0df" font-size="14">Athlete / training measurements</text>
+
+    <rect x="910" y="118" width="235" height="142" rx="16" fill="url(#card)" stroke="#2c6489"/>
+    <text x="934" y="150" fill="#70d7ff" font-size="13" font-weight="700">04 · REPORT</text>
+    <text x="934" y="181" fill="#ffffff" font-size="20" font-weight="700">Reproducible outputs</text>
+    <text x="934" y="210" fill="#b7d0df" font-size="14">CLI · JSON model cards</text>
+    <text x="934" y="233" fill="#b7d0df" font-size="14">Aggregate charts · local models</text>
+
+    <path d="M290 189 H316" stroke="#68d5ff" stroke-width="3" marker-end="url(#arrow)"/>
+    <path d="M560 189 H586" stroke="#68d5ff" stroke-width="3" marker-end="url(#arrow)"/>
+    <path d="M875 189 H901" stroke="#68d5ff" stroke-width="3" marker-end="url(#arrow)"/>
+
+    <rect x="55" y="292" width="1090" height="38" rx="10" fill="#0d1c2a" stroke="#2b9e7e"/>
+    <text x="600" y="317" text-anchor="middle" fill="#8ff0ce" font-size="14" font-weight="600">Observed ≠ causal · internally reproducible ≠ externally validated · public link ≠ reusable media</text>
+  </g>
+</svg>

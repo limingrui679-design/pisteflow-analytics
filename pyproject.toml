@@ -1,0 +1,133 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pisteflow-analytics"
+version = "0.1.0"
+description = "Reproducible three-weapon fencing video, athlete, and competition analytics."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { file = "LICENSE" }
+authors = [{ name = "Mingrui Li" }]
+keywords = ["fencing", "sports-analytics", "computer-vision", "data-analysis"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering :: Information Analysis",
+]
+dependencies = [
+  "duckdb>=1.0,<2",
+  "httpx>=0.27,<1",
+  "jinja2>=3.1,<4",
+  "numpy>=1.26,<3",
+  "openpyxl>=3.1,<4",
+  "pandas>=2.2,<3",
+  "plotly>=5.22,<7",
+  "pypdf>=5,<7",
+  "pyarrow>=15,<25",
+  "pydantic>=2.7,<3",
+  "pyyaml>=6.0,<7",
+  "rich>=13.7,<15",
+  "scikit-learn>=1.4,<2",
+  "scipy>=1.12,<2",
+  "truststore>=0.9,<1",
+  "typer>=0.12,<1",
+]
+
+[project.optional-dependencies]
+video = [
+  "opencv-python-headless>=4.10,<5",
+  "pillow>=10.3,<12",
+]
+ml = [
+  "torch>=2.3,<3",
+  "torchvision>=0.18,<1",
+]
+dashboard = ["streamlit>=1.36,<2"]
+ffd = ["h5py>=3.11,<4", "mat73>=0.65,<1"]
+collectors = [
+  "beautifulsoup4>=4.12,<5",
+  "gdown>=6.1,<7",
+  "pyreadr>=0.5,<1",
+  "pyreadstat>=1.2,<2",
+  "yt-dlp>=2025.1",
+]
+dev = [
+  "hypothesis>=6.103,<7",
+  "mypy>=1.10,<2",
+  "pytest>=8.2,<9",
+  "pytest-cov>=5,<7",
+  "ruff>=0.5,<1",
+]
+all = [
+  "beautifulsoup4>=4.12,<5",
+  "gdown>=6.1,<7",
+  "h5py>=3.11,<4",
+  "hypothesis>=6.103,<7",
+  "mat73>=0.65,<1",
+  "mypy>=1.10,<2",
+  "opencv-python-headless>=4.10,<5",
+  "pillow>=10.3,<12",
+  "pyreadr>=0.5,<1",
+  "pyreadstat>=1.2,<2",
+  "pytest>=8.2,<9",
+  "pytest-cov>=5,<7",
+  "ruff>=0.5,<1",
+  "streamlit>=1.36,<2",
+  "torch>=2.3,<3",
+  "torchvision>=0.18,<1",
+  "yt-dlp>=2025.1",
+]
+
+[project.scripts]
+pisteflow = "pisteflow.cli:app"
+
+[project.urls]
+Repository = "https://github.com/limingrui679-design/pisteflow-analytics"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pisteflow"]
+
+[tool.pytest.ini_options]
+addopts = "-ra --strict-markers"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-exclude = ["tmp"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+packages = ["pisteflow"]
+
+[[tool.mypy.overrides]]
+module = [
+  "bs4",
+  "cv2",
+  "gdown",
+  "h5py",
+  "mat73",
+  "openpyxl",
+  "openpyxl.*",
+  "pandas",
+  "pandas.*",
+  "pyreadr",
+  "pyreadstat",
+  "scipy.*",
+  "sklearn.*",
+  "streamlit",
+  "torch.*",
+  "torchvision.*",
+  "yt_dlp",
+  "yaml",
+]
+ignore_missing_imports = true

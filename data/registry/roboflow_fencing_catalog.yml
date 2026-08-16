@@ -1,0 +1,231 @@
+schema_version: 1
+reviewed_on: 2026-08-16
+platform: Roboflow Universe
+acquisition_policy: >-
+  Public project and version pages are catalogued without creating an account. Dataset exports
+  currently require sign-in, so none of the rows below is counted as acquired training data.
+  Project image counts, generated-version totals, augmentations, and possible forks are recorded
+  separately; they must not be summed until exact downloaded member hashes prove independence.
+sources:
+  - id: fencing_detection_ghypy_v6
+    url: https://universe.roboflow.com/fencing-detection-and-tracking/fencing-detection-ghypy/dataset/6
+    task: object_detection
+    license: CC BY 4.0
+    project_base_images_displayed: 242
+    reviewed_version: 6
+    version_total_images: 381
+    version_split: {train: 326, valid: 32, test: 23}
+    augmentations: horizontal_flip_with_three_outputs_per_training_example
+    classes: [Left Fencer, Mid line, null, Right Fencer, scoreboard, Weapon]
+    acquisition_status: login_gated_not_acquired
+    independence_status: generated_images_not_independent_of_project_originals
+
+  - id: ai_fencing_fencer_pose_v4
+    url: https://universe.roboflow.com/ai-fencing-5vbck/fencer-pose/dataset/4
+    task: keypoint_detection
+    license: CC BY 4.0
+    project_base_images_displayed: 466
+    reviewed_version: 4
+    version_total_images: 465
+    version_split: {train: 326, valid: 92, test: 47}
+    augmentations: none
+    classes: [fencer, saber, scorebox]
+    acquisition_status: login_gated_not_acquired
+    independence_status: one_null_filtered_version_member_and_cross_project_overlap_unresolved
+
+  - id: fencingproject_fencer_pose
+    url: https://universe.roboflow.com/fencingproject/fencer-pose-kk7qx
+    task: keypoint_detection
+    license: CC BY 4.0
+    project_base_images_displayed: 466
+    classes: [fencer, saber]
+    acquisition_status: login_gated_not_acquired
+    independence_status: possible_fork_or_lineage_overlap_with_ai_fencing_fencer_pose
+
+  - id: fencing_en_garde_v4_v5
+    url: https://universe.roboflow.com/fencing-app/fencing-en-garde
+    task: keypoint_detection
+    license: CC BY 4.0
+    project_base_images_displayed: 1949
+    reviewed_versions:
+      - version: 4
+        total_images: 1217
+        split: {train: 856, valid: 244, test: 117}
+        augmentations: none
+      - version: 5
+        total_images: 1706
+        split: {train: 1482, valid: 146, test: 78}
+        augmentations: blur_with_three_outputs_per_training_example
+    classes:
+      - Arm down
+      - Arm good distance
+      - Arm too far forward
+      - Arm up
+      - Centred body
+      - Leaning forward
+      - Legs bent perfect
+      - Legs bent too little
+      - Legs bent too much
+      - Long stance
+      - Medium stance
+      - Perfect arm angle
+      - Short stance
+    acquisition_status: login_gated_not_acquired
+    independence_status: version_members_and_augmented_variants_overlap
+
+  - id: fensam_merged
+    url: https://universe.roboflow.com/fencingproject/fensam-merged-2nsrn
+    task: keypoint_detection
+    license: CC BY 4.0
+    project_images_displayed_rounded: 3000
+    classes: [blade, fencer]
+    acquisition_status: login_gated_not_acquired
+    independence_status: exact_version_and_overlap_with_fencer_pose_lineage_unresolved
+
+  - id: fencing_scoreboard_v2
+    url: https://universe.roboflow.com/fencing-scoreboard-classifier/fencing-scoreboard-mlmlc/dataset/2
+    task: object_detection
+    license: CC BY 4.0
+    project_base_images_displayed: 153
+    reviewed_version: 2
+    version_total_images: 459
+    augmentations: three_outputs_per_training_example
+    classes: [scoreboard]
+    acquisition_status: login_gated_not_acquired
+    independence_status: version_total_is_augmented_from_project_originals
+
+  - id: fencing_blade_v13
+    url: https://universe.roboflow.com/fencing-blade-detection/fencing-blade/model/13
+    task: object_detection
+    license: unknown_on_reviewed_model_page
+    reviewed_version: 13
+    version_total_images: 618
+    classes: [fencing-blade]
+    acquisition_status: login_gated_not_acquired
+    independence_status: overlap_with_integrated_fencevision_blade_export_unresolved
+
+  - id: fencing_fxdmr_instance_segmentation
+    url: https://universe.roboflow.com/fecing/fencing-fxdmr-uiq92
+    task: instance_segmentation
+    license: MIT
+    project_base_images_displayed: 60
+    classes: [weapon, lower, point, scoreboard, strip, upper]
+    acquisition_status: login_gated_not_acquired
+    independence_status: exact_members_not_available_for_hash_comparison
+
+  - id: detect_player_2
+    url: https://universe.roboflow.com/fencing-n8efo/detect-player-2
+    task: keypoint_detection
+    license: CC BY 4.0
+    project_base_images_displayed: 40
+    classes: [left_player, right_player]
+    acquisition_status: login_gated_not_acquired
+    independence_status: exact_members_not_available_for_hash_comparison
+
+  - id: left_right_fencer_detection
+    url: https://universe.roboflow.com/e-bsnsf/left-right-fencer-detection
+    task: object_detection
+    license: unknown_on_reviewed_search_page
+    project_base_images_displayed: 50
+    classes: [fencing, left, right]
+    acquisition_status: login_gated_not_acquired
+    independence_status: exact_members_not_available_for_hash_comparison
+
+  - id: poleure_fencing_v4
+    url: https://universe.roboflow.com/poleure/fencing-zh9uo/dataset/4
+    task: object_detection
+    license: CC BY 4.0
+    reviewed_version: 4
+    version_total_images: 1229
+    version_split: {train: 852, valid: 251, test: 126}
+    augmentations: none
+    classes: [Left, Right]
+    acquisition_status: login_gated_not_acquired
+    independence_status: exact_members_and_cross_dataset_overlap_pending_export
+
+  - id: fencing_workspace_pose
+    url: https://universe.roboflow.com/fencing-5ldpj
+    task: keypoint_detection
+    license: unknown_on_reviewed_workspace_page
+    project_base_images_displayed: 642
+    acquisition_status: login_gated_not_acquired
+    independence_status: workspace_summary_only_exact_version_unresolved
+
+  - id: fencing_workspace_weapon_segmentation
+    url: https://universe.roboflow.com/fencing-5ldpj
+    task: instance_segmentation
+    license: unknown_on_reviewed_workspace_page
+    project_base_images_displayed: 48
+    classes: [Weapon]
+    acquisition_status: login_gated_not_acquired
+    independence_status: workspace_summary_only_exact_version_unresolved
+
+  - id: fencing_object_detection_custom_workflow
+    url: https://universe.roboflow.com/fencing-object-detection
+    task: object_detection
+    license: unknown_on_reviewed_workspace_page
+    project_images_displayed_rounded: 2330
+    classes: [EPEE, items]
+    acquisition_status: login_gated_not_acquired
+    independence_status: workspace_summary_only_exact_version_unresolved
+
+  - id: fencing_objectdetection_fencing
+    url: https://universe.roboflow.com/fencing-object-detection
+    task: object_detection
+    license: unknown_on_reviewed_workspace_page
+    project_base_images_displayed: 125
+    acquisition_status: login_gated_not_acquired
+    independence_status: workspace_summary_only_exact_version_unresolved
+
+  - id: fencing_keypoint_test
+    url: https://universe.roboflow.com/fencing-object-detection
+    task: keypoint_detection
+    license: unknown_on_reviewed_workspace_page
+    project_base_images_displayed: 52
+    acquisition_status: login_gated_not_acquired
+    independence_status: workspace_summary_only_exact_version_unresolved
+
+  - id: fencing_blade_guard_keypoints
+    url: https://universe.roboflow.com/fencing-object-detection
+    task: keypoint_detection
+    license: unknown_on_reviewed_workspace_page
+    project_base_images_displayed: 53
+    classes: [fencing-blade, guard]
+    acquisition_status: login_gated_not_acquired
+    independence_status: workspace_summary_only_exact_version_unresolved
+
+  - id: fencing_blade_instance_segmentation
+    url: https://universe.roboflow.com/fencing-object-detection
+    task: instance_segmentation
+    license: unknown_on_reviewed_workspace_page
+    project_base_images_displayed: 53
+    classes: [blade-guard, blade-tip, fencing-blade]
+    acquisition_status: login_gated_not_acquired
+    independence_status: workspace_summary_only_exact_version_unresolved
+
+  - id: sabre_object_detection
+    url: https://universe.roboflow.com/fencing-object-detection
+    task: object_detection
+    license: unknown_on_reviewed_workspace_page
+    project_base_images_displayed: 163
+    classes: [sabre]
+    acquisition_status: login_gated_not_acquired
+    independence_status: workspace_summary_only_exact_version_unresolved
+
+  - id: fencing_bout_numeric_classes
+    url: https://universe.roboflow.com/fencing-video-splicer/fencing-bout-dataset
+    task: classification_or_detection_numeric_classes
+    license: CC BY 4.0
+    project_base_images_displayed: 516
+    classes: 54_numeric_classes_plus_unlabelled
+    acquisition_status: login_gated_excluded_from_training
+    independence_status: authoritative_numeric_class_mapping_not_published
+
+  - id: curved_sword_and_foil_guard_workspace
+    url: https://universe.roboflow.com/fencing-object-detection
+    task: keypoint_detection
+    license: unknown_on_reviewed_workspace_page
+    project_images_displayed_rounded: 1590
+    classes: [foil, guard]
+    acquisition_status: login_gated_adjacent_domain_only
+    independence_status: curved_sword_semantics_not_verified_as_olympic_fencing
