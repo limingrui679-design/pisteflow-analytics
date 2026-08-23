@@ -1,0 +1,31 @@
+name: Data source proposal
+description: Propose a fencing source with enough information for a rights and evidence decision.
+title: "[Source]: "
+labels: [data-source]
+body:
+  - type: input
+    id: url
+    attributes:
+      label: Canonical source URL
+    validations:
+      required: true
+  - type: input
+    id: license
+    attributes:
+      label: License or terms URL
+      description: Write unknown when the reuse status is not stated.
+    validations:
+      required: true
+  - type: textarea
+    id: units
+    attributes:
+      label: Units, labels, and coverage
+      description: Explain what one row means and what weapon, date, geography, or population it covers.
+    validations:
+      required: true
+  - type: textarea
+    id: risks
+    attributes:
+      label: Privacy, bias, and duplication risks
+    validations:
+      required: true

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="440" viewBox="0 0 1200 440" role="img" aria-labelledby="title desc">
+  <title id="title">French fencing spatial access evidence summary</title>
+  <desc id="desc">The descriptive analysis covers 101 departments, 54,608 memberships, 1,124 facility records, and department bootstrap intervals.</desc>
+  <rect width="1200" height="440" rx="28" fill="#f7f9fc"/>
+  <text x="60" y="58" fill="#176f60" font-family="system-ui, sans-serif" font-size="14" font-weight="750" letter-spacing="2.5">DESCRIPTIVE · NOT CAUSAL</text>
+  <text x="60" y="96" fill="#13243a" font-family="system-ui, sans-serif" font-size="29" font-weight="750">French department access context</text>
+  <g font-family="system-ui, sans-serif">
+    <g transform="translate(60 128)"><rect width="220" height="104" rx="14" fill="#ffffff" stroke="#d9e1eb"/><text x="20" y="48" fill="#13243a" font-size="30" font-weight="800">101</text><text x="20" y="76" fill="#64748b" font-size="14">in-scope departments</text></g>
+    <g transform="translate(300 128)"><rect width="220" height="104" rx="14" fill="#ffffff" stroke="#d9e1eb"/><text x="20" y="48" fill="#13243a" font-size="30" font-weight="800">54,608</text><text x="20" y="76" fill="#64748b" font-size="14">2024 memberships</text></g>
+    <g transform="translate(540 128)"><rect width="220" height="104" rx="14" fill="#ffffff" stroke="#d9e1eb"/><text x="20" y="48" fill="#13243a" font-size="30" font-weight="800">1,124</text><text x="20" y="76" fill="#64748b" font-size="14">facility records</text></g>
+    <g transform="translate(780 128)"><rect width="360" height="104" rx="14" fill="#e8f7f2" stroke="#b7dfd3"/><text x="20" y="43" fill="#176f60" font-size="25" font-weight="800">ρ = 0.580</text><text x="20" y="69" fill="#315b54" font-size="13">membership rate ↔ establishment density</text><text x="20" y="90" fill="#64748b" font-size="12">department bootstrap 95%: 0.425–0.707</text></g>
+    <text x="60" y="286" fill="#13243a" font-size="15" font-weight="700">Memberships per 1,000 residents across departments</text>
+    <line x1="60" y1="342" x2="1140" y2="342" stroke="#ccd6e2" stroke-width="8" stroke-linecap="round"/>
+    <line x1="198" y1="342" x2="668" y2="342" stroke="#79a8ff" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="198" cy="342" r="10" fill="#315fbc"/><circle cx="345" cy="342" r="10" fill="#315fbc"/><circle cx="668" cy="342" r="10" fill="#315fbc"/>
+    <text x="174" y="380" fill="#64748b" font-size="12">P10 · 0.374</text><text x="305" y="380" fill="#64748b" font-size="12">Median · 0.629</text><text x="631" y="380" fill="#64748b" font-size="12">P90 · 1.077</text>
+    <text x="1140" y="413" fill="#64748b" font-size="12" text-anchor="end">Facilities ≠ capacity · membership ≠ person · association ≠ policy effect</text>
+  </g>
+</svg>

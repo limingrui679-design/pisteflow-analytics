@@ -20,7 +20,9 @@ from pisteflow.analysis.osf_pool_outcomes import train_and_report as train_osf_p
 from pisteflow.analysis.pose_outcomes import train_and_report as train_pose_outcomes
 from pisteflow.analysis.ranking_trajectory import train_and_report as train_ranking_trajectory
 from pisteflow.analysis.sabre_eye_outcomes import train_and_report as train_sabre_eye_outcomes
+from pisteflow.analysis.spatial_access import analyze_and_report as analyze_spatial_access
 from pisteflow.analysis.strength_velocity import train_and_report as train_strength_velocity
+from pisteflow.commands.showcase import app as showcase_app
 from pisteflow.config import PATHS
 from pisteflow.provenance import write_json
 from pisteflow.sources import (
@@ -134,6 +136,7 @@ analysis_app = typer.Typer(no_args_is_help=True, help="Run leakage-aware fencing
 app.add_typer(sources_app, name="sources")
 app.add_typer(video_app, name="video")
 app.add_typer(analysis_app, name="analysis")
+app.add_typer(showcase_app, name="showcase")
 console = Console()
 
 
@@ -2319,6 +2322,34 @@ def sabre_eye_outcomes(
         touches,
         PATHS.models / "sabre-eye-outcomes.pkl",
         PATHS.repository / "reports/model-cards/sabre-eye-outcomes.json",
+    )
+    console.print_json(json.dumps(report))
+
+
+@analysis_app.command("france-spatial-access")
+def france_spatial_access(
+    licences: Annotated[
+        Path,
+        typer.Option(exists=True, readable=True),
+    ] = PATHS.processed / "france-fencing-licences-2024-department-age-sex.parquet",
+    clubs: Annotated[
+        Path,
+        typer.Option(exists=True, readable=True),
+    ] = PATHS.processed / "france-fencing-clubs-2022-2024.parquet",
+    equipment: Annotated[
+        Path,
+        typer.Option(exists=True, readable=True),
+    ] = PATHS.processed / "france-fencing-equipment.parquet",
+) -> None:
+    """Measure department variation without inferring causal access or policy effects."""
+
+    PATHS.create_local_directories()
+    report = analyze_spatial_access(
+        licences,
+        clubs,
+        equipment,
+        PATHS.processed / "france-fencing-spatial-access-departments.parquet",
+        PATHS.repository / "reports/model-cards/france-spatial-access.json",
     )
     console.print_json(json.dumps(report))
 

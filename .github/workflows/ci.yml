@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+      - name: Install package and test dependencies
+        run: python -m pip install --upgrade pip && python -m pip install -e '.[dev,video,collectors,ffd]'
+      - name: Lint
+        run: ruff check .
+      - name: Type check
+        run: mypy
+      - name: Test
+        run: pytest -q --cov=pisteflow --cov-report=term-missing:skip-covered
+      - name: Audit case catalog and repository evidence
+        run: pisteflow showcase audit --evidence-root .
+      - name: Verify evidence hashes and generated showcase surfaces
+        run: python scripts/sync_showcase.py --check
+      - name: Build distributions
+        run: python -m build
+      - name: Audit distribution contents and size
+        run: python scripts/audit_distribution.py dist
+      - name: Smoke-test wheel package data
+        run: |
+          python -m pip install --force-reinstall --no-deps dist/*.whl
+          python -c "from pisteflow.showcase import load_catalog; assert len(load_catalog().cases) == 15"
+          pisteflow showcase list --status no-lift --json

@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Inspect PisteFlow's evidence-bounded fencing analytics through real results, credible baselines, validation designs, evidence paths, and explicit claim boundaries."
+    />
+    <meta name="theme-color" content="#11120f" />
+    <title>PisteFlow — Evidence Studio</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#case-list">Skip to evidence cases</a>
+
+    <header class="site-header">
+      <nav class="nav shell" aria-label="Primary navigation">
+        <a class="brand" href="./" aria-label="PisteFlow Evidence Studio home">
+          <svg class="brand-mark" viewBox="0 0 36 36" aria-hidden="true">
+            <path d="M5 7h26M5 18h18M5 29h26" />
+            <circle cx="27" cy="18" r="4" />
+          </svg>
+          <span>PisteFlow</span>
+          <span class="brand-product">Evidence Studio</span>
+        </a>
+        <div class="nav-links">
+          <a href="https://github.com/limingrui679-design/pisteflow-analytics/blob/main/docs/CASE_STUDIES.md">
+            Case guide
+          </a>
+          <a class="nav-cta" href="https://github.com/limingrui679-design/pisteflow-analytics">
+            View on GitHub <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero shell" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <div class="catalog-line">
+            <span class="pulse" aria-hidden="true"></span>
+            Evidence catalog 0.2.0
+            <span class="catalog-separator" aria-hidden="true">/</span>
+            public aggregate evidence
+          </div>
+          <h1 id="hero-title">Fencing evidence,<br /><em>under pressure.</em></h1>
+          <p class="lede">
+            Fifteen analyses across competition, motion, behavior, health, governance, and access.
+            Every case keeps its unit, baseline, validation design, evidence path, and claim boundary
+            in the same frame.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#cases">
+              Open the evidence desk <span aria-hidden="true">↓</span>
+            </a>
+            <a class="button button-quiet" href="cases.json">Download catalog <span aria-hidden="true">↗</span></a>
+          </div>
+          <ul class="hero-proof" aria-label="Evidence commitments">
+            <li>No hidden uplift</li>
+            <li>No silent leakage</li>
+            <li>No impact theatre</li>
+          </ul>
+        </div>
+
+        <aside class="signal-panel" aria-labelledby="signal-title">
+          <div class="panel-heading">
+            <div>
+              <span class="panel-kicker">Catalog signal</span>
+              <h2 id="signal-title">What the evidence contains</h2>
+            </div>
+            <span class="live-label"><i aria-hidden="true"></i> Live JSON</span>
+          </div>
+          <div class="signal-total">
+            <strong id="signal-case-count">15</strong>
+            <span>bounded<br />cases</span>
+          </div>
+          <div class="signal-block">
+            <div class="signal-label">
+              <span>Result mix</span>
+              <span>all outcomes retained</span>
+            </div>
+            <div id="status-spectrum" class="status-spectrum" aria-label="Loading result mix"></div>
+            <div id="status-legend" class="status-legend"></div>
+          </div>
+          <div class="signal-block capability-block">
+            <div class="signal-label">
+              <span>Capability coverage</span>
+              <span id="coverage-label">8 lenses</span>
+            </div>
+            <div id="capability-bars" class="capability-bars" aria-label="Loading capability coverage"></div>
+          </div>
+          <p class="signal-note">Coverage labels describe the catalog. They are not quality scores.</p>
+        </aside>
+      </section>
+
+      <section class="metric-rail" aria-label="Catalog summary">
+        <dl class="shell metrics">
+          <div><dt id="case-count">15</dt><dd>cases</dd></div>
+          <div><dt id="lens-count">8</dt><dd>decision lenses</dd></div>
+          <div><dt id="evidence-count">23</dt><dd>evidence files</dd></div>
+          <div><dt id="negative-count">4</dt><dd>no-lift results kept</dd></div>
+        </dl>
+      </section>
+
+      <section class="contract shell" aria-labelledby="contract-title">
+        <div class="contract-intro">
+          <p class="eyebrow">The evidence contract</p>
+          <h2 id="contract-title">Five checks before a result becomes a claim.</h2>
+        </div>
+        <ol class="contract-steps">
+          <li><span>01</span><strong>Unit first</strong><small>Know what one row means.</small></li>
+          <li><span>02</span><strong>Leakage isolated</strong><small>Separate people, time, and sources.</small></li>
+          <li><span>03</span><strong>Baseline visible</strong><small>Beat the rule that matters.</small></li>
+          <li><span>04</span><strong>Negatives stay</strong><small>Keep failure informative.</small></li>
+          <li><span>05</span><strong>Claims stop</strong><small>End where evidence ends.</small></li>
+        </ol>
+      </section>
+
+      <section class="workspace" id="cases" aria-labelledby="explorer-title">
+        <div class="shell">
+          <div class="workspace-heading">
+            <div>
+              <p class="eyebrow">Evidence desk</p>
+              <h2 id="explorer-title">Inspect one case at a time.</h2>
+            </div>
+            <p>
+              Select a case to compare the observed result with its credible baseline, then inspect
+              the method, validation, decision use, evidence paths, and claim boundary.
+            </p>
+          </div>
+
+          <form class="command-bar" id="filters" role="search">
+            <label class="search-field">
+              <span class="field-label">Search catalog</span>
+              <span class="input-shell">
+                <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" /><path d="m13 13 4 4" /></svg>
+                <input id="search" name="q" type="search" placeholder="Leakage, behavior, spatial…" autocomplete="off" />
+              </span>
+            </label>
+            <label>
+              <span class="field-label">Capability</span>
+              <select id="lens" name="lens">
+                <option value="">All capabilities</option>
+                <option value="decision-analytics">Decision analytics</option>
+                <option value="reproducible-ml">Reproducible ML</option>
+                <option value="statistical-inference">Statistical inference</option>
+                <option value="data-systems-governance">Data systems &amp; governance</option>
+                <option value="risk-finance">Risk &amp; finance</option>
+                <option value="behavioral-science">Behavioral science</option>
+                <option value="population-health">Population health</option>
+                <option value="spatial-policy">Spatial policy</option>
+              </select>
+            </label>
+            <label>
+              <span class="field-label">Result</span>
+              <select id="status" name="status">
+                <option value="">All results</option>
+                <option value="lift">Lift</option>
+                <option value="no-lift">No lift</option>
+                <option value="mixed">Mixed</option>
+                <option value="replication">Replication</option>
+                <option value="diagnostic">Diagnostic</option>
+                <option value="descriptive">Descriptive</option>
+              </select>
+            </label>
+            <label>
+              <span class="field-label">Weapon</span>
+              <select id="weapon" name="weapon">
+                <option value="">All weapons</option>
+                <option value="epee">Epee</option>
+                <option value="foil">Foil</option>
+                <option value="sabre">Sabre</option>
+              </select>
+            </label>
+            <button class="reset" id="reset" type="reset" title="Reset all filters">
+              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M15.5 6A7 7 0 1 0 17 12" /><path d="M15.5 2v4h-4" /></svg>
+              <span>Reset</span>
+            </button>
+          </form>
+
+          <div id="error" class="message error" hidden></div>
+
+          <div class="desk-grid">
+            <section class="catalog-list" aria-label="Evidence case list">
+              <div class="list-heading">
+                <span id="result-count" aria-live="polite">Loading cases…</span>
+                <span>Click to inspect</span>
+              </div>
+              <div id="case-list" class="case-list" aria-busy="true"></div>
+              <div id="empty" class="message" hidden>
+                <h3>No matching evidence.</h3>
+                <p>Broaden one filter or reset the desk.</p>
+              </div>
+            </section>
+
+            <aside id="detail-panel" class="detail-panel" aria-live="polite" aria-label="Selected case details">
+              <div class="detail-loading">Loading evidence contract…</div>
+            </aside>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="shell footer-inner">
+        <div>
+          <a class="footer-brand" href="./">PisteFlow</a>
+          <p>Analysis that keeps its boundary visible.</p>
+        </div>
+        <div class="footer-links">
+          <a href="cases.json">Catalog JSON</a>
+          <a href="https://github.com/limingrui679-design/pisteflow-analytics/blob/main/docs/REPRODUCIBILITY.md">Reproduce</a>
+          <a href="https://github.com/limingrui679-design/pisteflow-analytics/blob/main/LICENSE">MIT License</a>
+        </div>
+        <p class="footer-boundary">Internal evidence is not external validation or real-world impact.</p>
+      </div>
+    </footer>
+  </body>
+</html>

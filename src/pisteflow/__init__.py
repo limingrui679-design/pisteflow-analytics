@@ -3,4 +3,4 @@
 from pisteflow.models import Weapon
 
 __all__ = ["Weapon"]
-__version__ = "0.1.0"
+__version__ = "0.2.0"

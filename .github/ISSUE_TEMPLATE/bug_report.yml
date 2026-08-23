@@ -1,0 +1,35 @@
+name: Bug report
+description: Report a reproducible defect in code, data contracts, docs, or the demo.
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Please remove private athlete data, credentials, and non-redistributable rows.
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: Include the command, expected behavior, and actual behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: Share the smallest safe example and complete error output.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: PisteFlow version or commit
+    validations:
+      required: true
+  - type: dropdown
+    id: evidence
+    attributes:
+      label: Does this affect a published evidence claim?
+      options: ["Yes", "No", "Unsure"]
+    validations:
+      required: true
