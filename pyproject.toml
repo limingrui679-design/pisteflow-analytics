@@ -4,13 +4,20 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pisteflow-analytics"
-version = "0.1.0"
-description = "Reproducible three-weapon fencing video, athlete, and competition analytics."
+version = "0.2.0"
+description = "Evidence-bounded fencing analytics across competition, motion, health, and access."
 readme = "README.md"
 requires-python = ">=3.11"
 license = { file = "LICENSE" }
 authors = [{ name = "Mingrui Li" }]
-keywords = ["fencing", "sports-analytics", "computer-vision", "data-analysis"]
+keywords = [
+  "fencing",
+  "sports-analytics",
+  "computer-vision",
+  "data-analysis",
+  "reproducible-research",
+  "sports-science",
+]
 classifiers = [
   "Development Status :: 3 - Alpha",
   "License :: OSI Approved :: MIT License",
@@ -57,6 +64,7 @@ collectors = [
   "yt-dlp>=2025.1",
 ]
 dev = [
+  "build>=1.2,<2",
   "hypothesis>=6.103,<7",
   "mypy>=1.10,<2",
   "pytest>=8.2,<9",
@@ -65,6 +73,7 @@ dev = [
 ]
 all = [
   "beautifulsoup4>=4.12,<5",
+  "build>=1.2,<2",
   "gdown>=6.1,<7",
   "h5py>=3.11,<4",
   "hypothesis>=6.103,<7",
@@ -84,17 +93,39 @@ all = [
 ]
 
 [project.scripts]
-pisteflow = "pisteflow.cli:app"
+pisteflow = "pisteflow.entrypoint:main"
 
 [project.urls]
+Documentation = "https://limingrui679-design.github.io/pisteflow-analytics/"
+Issues = "https://github.com/limingrui679-design/pisteflow-analytics/issues"
 Repository = "https://github.com/limingrui679-design/pisteflow-analytics"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/pisteflow"]
 
+[tool.hatch.build.targets.sdist]
+exclude = [
+  "/artifacts/**",
+  "/data/cache/**",
+  "/data/manifests/*.jsonl",
+  "/data/models/**",
+  "/data/processed/**",
+  "/data/raw/**",
+  "/dist/**",
+]
+
 [tool.pytest.ini_options]
 addopts = "-ra --strict-markers"
 testpaths = ["tests"]
+
+[tool.coverage.run]
+source = ["pisteflow"]
+
+[tool.coverage.report]
+fail_under = 55
+precision = 1
+show_missing = true
+skip_covered = true
 
 [tool.ruff]
 line-length = 100
@@ -107,7 +138,7 @@ select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
 [tool.mypy]
 python_version = "3.12"
 strict = true
-packages = ["pisteflow"]
+files = ["src/pisteflow", "scripts"]
 
 [[tool.mypy.overrides]]
 module = [

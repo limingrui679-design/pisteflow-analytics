@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If PisteFlow informs your work, cite the software and the original sources used by your analysis."
+title: "PisteFlow Analytics"
+type: software
+authors:
+  - family-names: Li
+    given-names: Mingrui
+repository-code: "https://github.com/limingrui679-design/pisteflow-analytics"
+url: "https://limingrui679-design.github.io/pisteflow-analytics/"
+version: 0.2.0
+license: MIT
+keywords:
+  - fencing
+  - sports analytics
+  - reproducible research
+  - computer vision
+  - sports science

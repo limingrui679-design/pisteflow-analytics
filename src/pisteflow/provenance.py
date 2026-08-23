@@ -9,6 +9,8 @@ from collections.abc import Iterable
 from pathlib import Path
 from typing import Any
 
+from pisteflow.config import PATHS
+
 
 def sha256_bytes(payload: bytes) -> str:
     return hashlib.sha256(payload).hexdigest()
@@ -31,6 +33,35 @@ def canonical_json_bytes(value: Any) -> bytes:
     ).encode("utf-8")
 
 
+def portable_provenance(value: Any) -> Any:
+    """Remove machine-specific managed roots from persisted provenance.
+
+    Public manifests should identify repository artifacts with stable POSIX
+    paths such as ``data/manifests/example.json``. When the data directory is
+    configured outside the checkout, it is represented below the same logical
+    ``data/`` namespace. Values outside either managed root are left untouched.
+    """
+
+    if isinstance(value, dict):
+        return {key: portable_provenance(item) for key, item in value.items()}
+    if isinstance(value, list):
+        return [portable_provenance(item) for item in value]
+    if isinstance(value, tuple):
+        return tuple(portable_provenance(item) for item in value)
+    if not isinstance(value, str):
+        return value
+
+    normalized = value.replace("\\", "/")
+    repository_prefix = f"{PATHS.repository.resolve().as_posix().rstrip('/')}/"
+    if normalized.startswith(repository_prefix):
+        return normalized.removeprefix(repository_prefix)
+
+    data_prefix = f"{PATHS.data.resolve().as_posix().rstrip('/')}/"
+    if normalized.startswith(data_prefix):
+        return f"data/{normalized.removeprefix(data_prefix)}"
+    return value
+
+
 def atomic_write_bytes(path: Path, payload: bytes) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_name(f".{path.name}.tmp-{os.getpid()}")
@@ -39,13 +70,15 @@ def atomic_write_bytes(path: Path, payload: bytes) -> None:
 
 
 def write_json(path: Path, value: Any) -> str:
-    payload = canonical_json_bytes(value) + b"\n"
+    payload = canonical_json_bytes(portable_provenance(value)) + b"\n"
     atomic_write_bytes(path, payload)
     return sha256_bytes(payload)
 
 
 def write_jsonl(path: Path, rows: Iterable[dict[str, Any]]) -> str:
-    payload = b"".join(canonical_json_bytes(row) + b"\n" for row in rows)
+    payload = b"".join(
+        canonical_json_bytes(portable_provenance(row)) + b"\n" for row in rows
+    )
     atomic_write_bytes(path, payload)
     return sha256_bytes(payload)
 

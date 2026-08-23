@@ -1,46 +1,98 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="500" viewBox="0 0 1200 500" role="img" aria-labelledby="title desc">
-  <title id="title">PisteFlow evidence layers</title>
-  <desc id="desc">Selected exact counts for competition, video and pose, and athlete or training evidence. Units are not summed.</desc>
-  <rect width="1200" height="500" rx="22" fill="#f7fbfd"/>
-  <text x="54" y="54" fill="#102a43" font-family="Inter,Arial,sans-serif" font-size="28" font-weight="750">Real evidence, separated by unit</text>
-  <text x="54" y="83" fill="#526b7a" font-family="Inter,Arial,sans-serif" font-size="15">Counts below are verified source units—not one inflated “total dataset” number.</text>
-  <g font-family="Inter,Arial,sans-serif">
-    <rect x="50" y="112" width="350" height="318" rx="18" fill="#eaf7ff" stroke="#86c9ed"/>
-    <circle cx="84" cy="149" r="13" fill="#1689c9"/>
-    <text x="108" y="157" fill="#0c4f75" font-size="20" font-weight="700">Competition</text>
-    <text x="78" y="207" fill="#102a43" font-size="29" font-weight="750">374,543</text>
-    <text x="78" y="229" fill="#526b7a" font-size="14">national-event bout rows · 3 weapons</text>
-    <text x="78" y="271" fill="#102a43" font-size="25" font-weight="700">115,238</text>
-    <text x="78" y="292" fill="#526b7a" font-size="14">historical foil pool bouts</text>
-    <text x="78" y="334" fill="#102a43" font-size="25" font-weight="700">43,080</text>
-    <text x="78" y="355" fill="#526b7a" font-size="14">NCAA pool-bout rows · 3 weapons</text>
-    <text x="78" y="397" fill="#102a43" font-size="25" font-weight="700">932</text>
-    <text x="78" y="418" fill="#526b7a" font-size="14">Paris 2024 score-table observations</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-labelledby="title desc">
+  <title id="title">PisteFlow Evidence Studio overview</title>
+  <desc id="desc">A dark editorial interface summarizing fifteen bounded cases, eight decision lenses, twenty-three evidence files, and four retained no-lift results.</desc>
+  <defs>
+    <linearGradient id="glow" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#11120f"/>
+      <stop offset="1" stop-color="#171a24"/>
+    </linearGradient>
+    <clipPath id="panel-clip"><rect x="710" y="44" width="438" height="472" rx="15"/></clipPath>
+  </defs>
 
-    <rect x="425" y="112" width="350" height="318" rx="18" fill="#f2efff" stroke="#b3a4eb"/>
-    <circle cx="459" cy="149" r="13" fill="#7157c8"/>
-    <text x="483" y="157" fill="#49349a" font-size="20" font-weight="700">Video &amp; pose</text>
-    <text x="453" y="207" fill="#102a43" font-size="29" font-weight="750">9,328</text>
-    <text x="453" y="229" fill="#526b7a" font-size="14">75-frame pose clips · 1,332 source videos</text>
-    <text x="453" y="271" fill="#102a43" font-size="25" font-weight="700">6,473</text>
-    <text x="453" y="292" fill="#526b7a" font-size="14">original RT-Fencing images · 386 groups</text>
-    <text x="453" y="334" fill="#102a43" font-size="25" font-weight="700">2,427</text>
-    <text x="453" y="355" fill="#526b7a" font-size="14">unique FACTS action annotations</text>
-    <text x="453" y="397" fill="#102a43" font-size="25" font-weight="700">43</text>
-    <text x="453" y="418" fill="#526b7a" font-size="14">open-license Commons videos · 3 weapons</text>
+  <rect width="1200" height="560" rx="22" fill="url(#glow)"/>
+  <g opacity=".08" stroke="#f7f5ee">
+    <path d="M0 112h1200M0 224h1200M0 336h1200M0 448h1200"/>
+    <path d="M120 0v560M240 0v560M360 0v560M480 0v560M600 0v560M720 0v560M840 0v560M960 0v560M1080 0v560"/>
+  </g>
 
-    <rect x="800" y="112" width="350" height="318" rx="18" fill="#ecfbf5" stroke="#83d3b0"/>
-    <circle cx="834" cy="149" r="13" fill="#189468"/>
-    <text x="858" y="157" fill="#0e6245" font-size="20" font-weight="700">Athlete &amp; training</text>
-    <text x="828" y="207" fill="#102a43" font-size="29" font-weight="750">45</text>
-    <text x="828" y="229" fill="#526b7a" font-size="14">elite strength / lunge profiles · 3 weapons</text>
-    <text x="828" y="271" fill="#102a43" font-size="25" font-weight="700">1,235</text>
-    <text x="828" y="292" fill="#526b7a" font-size="14">retained impact trials · 69 real fencers</text>
-    <text x="828" y="334" fill="#102a43" font-size="25" font-weight="700">1,512</text>
-    <text x="828" y="355" fill="#526b7a" font-size="14">intervention measurement cells · 21 fencers</text>
-    <text x="828" y="397" fill="#102a43" font-size="25" font-weight="700">23 × 26</text>
-    <text x="828" y="418" fill="#526b7a" font-size="14">U15 fencers × privacy-minimized measures</text>
+  <g font-family="Arial,Helvetica,sans-serif">
+    <circle cx="56" cy="61" r="5" fill="#dfff4f"/>
+    <text x="70" y="65" fill="#b8bab2" font-family="monospace" font-size="12" font-weight="700" letter-spacing="1.4">PISTEFLOW / EVIDENCE STUDIO 0.2.0</text>
 
-    <text x="600" y="470" text-anchor="middle" fill="#526b7a" font-size="14">Full source, rights, locality, deduplication, and limitation matrix: docs/DATA_ATLAS.md</text>
+    <text x="52" y="160" fill="#f7f5ee" font-size="66" font-weight="700" letter-spacing="-4">Fencing evidence,</text>
+    <text x="50" y="238" fill="#dfff4f" font-family="Georgia,serif" font-size="78" font-style="italic" letter-spacing="-4">under pressure.</text>
+
+    <text x="54" y="292" fill="#b9bbb3" font-size="17">Every case keeps its result, credible baseline, validation design,</text>
+    <text x="54" y="319" fill="#b9bbb3" font-size="17">evidence path, and claim boundary in the same frame.</text>
+
+    <rect x="52" y="362" width="240" height="48" rx="7" fill="#dfff4f"/>
+    <text x="72" y="392" fill="#263000" font-size="14" font-weight="700">OPEN THE EVIDENCE DESK</text>
+    <text x="270" y="392" fill="#263000" font-size="18">↓</text>
+
+    <g font-family="monospace" font-size="10" fill="#8f9189" letter-spacing="1">
+      <text x="54" y="463">NO HIDDEN UPLIFT</text>
+      <path d="M172 459h24" stroke="#555750"/>
+      <text x="210" y="463">NO SILENT LEAKAGE</text>
+      <path d="M340 459h24" stroke="#555750"/>
+      <text x="378" y="463">NO IMPACT THEATRE</text>
+    </g>
+
+    <rect x="710" y="44" width="438" height="472" rx="15" fill="#f7f5ee"/>
+    <g clip-path="url(#panel-clip)">
+      <circle cx="1157" cy="525" r="130" fill="none" stroke="#11120f" stroke-opacity=".07"/>
+      <circle cx="1157" cy="525" r="101" fill="none" stroke="#11120f" stroke-opacity=".05" stroke-width="24"/>
+    </g>
+    <text x="746" y="83" fill="#686a62" font-family="monospace" font-size="10" font-weight="700" letter-spacing="1.4">CATALOG SIGNAL</text>
+    <circle cx="1066" cy="77" r="4" fill="#62a846"/>
+    <text x="1077" y="81" fill="#686a62" font-family="monospace" font-size="9" font-weight="700" letter-spacing="1">LIVE JSON</text>
+
+    <text x="746" y="132" fill="#11120f" font-size="24" font-weight="700" letter-spacing="-1">What the evidence contains</text>
+    <text x="744" y="235" fill="#11120f" font-size="108" font-weight="700" letter-spacing="-9">15</text>
+    <text x="873" y="201" fill="#686a62" font-size="13" font-weight="700">BOUNDED</text>
+    <text x="873" y="218" fill="#686a62" font-size="13" font-weight="700">CASES</text>
+    <path d="M746 256h366" stroke="#cdcec5"/>
+
+    <text x="746" y="285" fill="#686a62" font-family="monospace" font-size="10" font-weight="700" letter-spacing="1">RESULT MIX</text>
+    <rect x="746" y="299" width="72" height="12" rx="2" fill="#2f7d32"/>
+    <rect x="822" y="299" width="24" height="12" rx="2" fill="#6e83ff"/>
+    <rect x="850" y="299" width="96" height="12" rx="2" fill="#ff7452"/>
+    <rect x="950" y="299" width="48" height="12" rx="2" fill="#a887ff"/>
+    <rect x="1002" y="299" width="24" height="12" rx="2" fill="#ff87aa"/>
+    <rect x="1030" y="299" width="82" height="12" rx="2" fill="#7b7d75"/>
+    <g fill="#686a62" font-family="monospace" font-size="8">
+      <text x="746" y="329">LIFT 3</text>
+      <text x="797" y="329">REPL. 1</text>
+      <text x="850" y="329">NO LIFT 4</text>
+      <text x="913" y="329">MIXED 2</text>
+      <text x="966" y="329">DIAG. 1</text>
+      <text x="1016" y="329">DESCR. 4</text>
+    </g>
+
+    <text x="746" y="362" fill="#686a62" font-family="monospace" font-size="10" font-weight="700" letter-spacing="1">CATALOG COVERAGE</text>
+    <g fill="#11120f">
+      <text x="746" y="397" font-size="35" font-weight="700" letter-spacing="-2">8</text>
+      <text x="779" y="389" fill="#686a62" font-family="monospace" font-size="9">DECISION</text>
+      <text x="779" y="402" fill="#686a62" font-family="monospace" font-size="9">LENSES</text>
+
+      <text x="877" y="397" font-size="35" font-weight="700" letter-spacing="-2">23</text>
+      <text x="922" y="389" fill="#686a62" font-family="monospace" font-size="9">EVIDENCE</text>
+      <text x="922" y="402" fill="#686a62" font-family="monospace" font-size="9">FILES</text>
+
+      <text x="1021" y="397" font-size="35" font-weight="700" letter-spacing="-2">4</text>
+      <text x="1045" y="389" fill="#686a62" font-family="monospace" font-size="9">NO-LIFT</text>
+      <text x="1045" y="402" fill="#686a62" font-family="monospace" font-size="9">KEPT</text>
+    </g>
+
+    <g font-family="monospace" font-size="9">
+      <text x="746" y="446" fill="#11120f">STATISTICAL INFERENCE</text>
+      <text x="1095" y="446" fill="#686a62">13</text>
+      <rect x="746" y="454" width="366" height="3" fill="#d4d3cc"/>
+      <rect x="746" y="454" width="366" height="3" fill="#11120f"/>
+
+      <text x="746" y="481" fill="#11120f">DECISION ANALYTICS</text>
+      <text x="1095" y="481" fill="#686a62">07</text>
+      <rect x="746" y="489" width="366" height="3" fill="#d4d3cc"/>
+      <rect x="746" y="489" width="197" height="3" fill="#11120f"/>
+    </g>
   </g>
 </svg>

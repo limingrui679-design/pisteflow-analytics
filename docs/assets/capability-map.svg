@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="500" viewBox="0 0 1200 500" role="img" aria-labelledby="title desc">
+  <title id="title">PisteFlow capability map</title>
+  <desc id="desc">Fifteen evidence-bounded cases span eight capability lenses.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07101f"/>
+      <stop offset="1" stop-color="#10233c"/>
+    </linearGradient>
+    <linearGradient id="core" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#79e3c2"/>
+      <stop offset="1" stop-color="#79a8ff"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="500" rx="28" fill="url(#bg)"/>
+  <text x="60" y="60" fill="#79e3c2" font-family="system-ui, sans-serif" font-size="14" font-weight="700" letter-spacing="3">15 CASES · 8 LENSES</text>
+  <text x="60" y="102" fill="#f5f8ff" font-family="system-ui, sans-serif" font-size="30" font-weight="750">One evidence core, several decision views</text>
+  <g filter="url(#shadow)">
+    <rect x="60" y="142" width="252" height="120" rx="16" fill="#12213a" stroke="#365170"/>
+    <rect x="336" y="142" width="252" height="120" rx="16" fill="#12213a" stroke="#365170"/>
+    <rect x="612" y="142" width="252" height="120" rx="16" fill="#12213a" stroke="#365170"/>
+    <rect x="888" y="142" width="252" height="120" rx="16" fill="#12213a" stroke="#365170"/>
+    <rect x="60" y="286" width="252" height="120" rx="16" fill="#12213a" stroke="#365170"/>
+    <rect x="336" y="286" width="252" height="120" rx="16" fill="#12213a" stroke="#365170"/>
+    <rect x="612" y="286" width="252" height="120" rx="16" fill="#12213a" stroke="#365170"/>
+    <rect x="888" y="286" width="252" height="120" rx="16" fill="#12213a" stroke="#365170"/>
+  </g>
+  <g font-family="system-ui, sans-serif">
+    <g transform="translate(82 170)"><circle cx="8" cy="8" r="8" fill="#79e3c2"/><text x="0" y="48" fill="#f5f8ff" font-size="19" font-weight="700">Decision analytics</text><text x="0" y="76" fill="#aebbd0" font-size="14">7 cases · model → action</text></g>
+    <g transform="translate(358 170)"><circle cx="8" cy="8" r="8" fill="#79a8ff"/><text x="0" y="48" fill="#f5f8ff" font-size="19" font-weight="700">Statistical inference</text><text x="0" y="76" fill="#aebbd0" font-size="14">13 cases · uncertainty</text></g>
+    <g transform="translate(634 170)"><circle cx="8" cy="8" r="8" fill="#b59cff"/><text x="0" y="48" fill="#f5f8ff" font-size="19" font-weight="700">Reproducible ML</text><text x="0" y="76" fill="#aebbd0" font-size="14">6 cases · leakage control</text></g>
+    <g transform="translate(910 170)"><circle cx="8" cy="8" r="8" fill="#ffca80"/><text x="0" y="48" fill="#f5f8ff" font-size="18" font-weight="700">Systems &amp; governance</text><text x="0" y="76" fill="#aebbd0" font-size="14">6 cases · rights + semantics</text></g>
+    <g transform="translate(82 314)"><circle cx="8" cy="8" r="8" fill="#ff9ca8"/><text x="0" y="48" fill="#f5f8ff" font-size="19" font-weight="700">Risk &amp; finance</text><text x="0" y="76" fill="#aebbd0" font-size="14">5 cases · downside + baseline</text></g>
+    <g transform="translate(358 314)"><circle cx="8" cy="8" r="8" fill="#f4df7c"/><text x="0" y="48" fill="#f5f8ff" font-size="19" font-weight="700">Behavioral science</text><text x="0" y="76" fill="#aebbd0" font-size="14">3 cases · mechanism tests</text></g>
+    <g transform="translate(634 314)"><circle cx="8" cy="8" r="8" fill="#73d8f1"/><text x="0" y="48" fill="#f5f8ff" font-size="19" font-weight="700">Population health</text><text x="0" y="76" fill="#aebbd0" font-size="14">5 cases · units + context</text></g>
+    <g transform="translate(910 314)"><circle cx="8" cy="8" r="8" fill="url(#core)"/><text x="0" y="48" fill="#f5f8ff" font-size="19" font-weight="700">Spatial policy</text><text x="0" y="76" fill="#aebbd0" font-size="14">1 case · place + distribution</text></g>
+  </g>
+  <text x="60" y="458" fill="#aebbd0" font-family="system-ui, sans-serif" font-size="14">Every lens points back to the same units, split design, baseline, evidence path, and claim boundary.</text>
+</svg>
