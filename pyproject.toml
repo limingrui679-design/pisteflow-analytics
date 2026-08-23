@@ -48,7 +48,7 @@ dependencies = [
 [project.optional-dependencies]
 video = [
   "opencv-python-headless>=4.10,<5",
-  "pillow>=10.3,<12",
+  "pillow>=10.3,<13",
 ]
 ml = [
   "torch>=2.3,<3",
@@ -80,7 +80,7 @@ all = [
   "mat73>=0.65,<1",
   "mypy>=1.10,<2",
   "opencv-python-headless>=4.10,<5",
-  "pillow>=10.3,<12",
+  "pillow>=10.3,<13",
   "pyreadr>=0.5,<1",
   "pyreadstat>=1.2,<2",
   "pytest>=8.2,<9",
