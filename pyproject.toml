@@ -67,7 +67,7 @@ dev = [
   "build>=1.2,<2",
   "hypothesis>=6.103,<7",
   "mypy>=1.10,<2",
-  "pytest>=8.2,<9",
+  "pytest>=8.2,<10",
   "pytest-cov>=5,<7",
   "ruff>=0.5,<1",
 ]
@@ -83,7 +83,7 @@ all = [
   "pillow>=10.3,<12",
   "pyreadr>=0.5,<1",
   "pyreadstat>=1.2,<2",
-  "pytest>=8.2,<9",
+  "pytest>=8.2,<10",
   "pytest-cov>=5,<7",
   "ruff>=0.5,<1",
   "streamlit>=1.36,<2",
