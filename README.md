@@ -64,7 +64,7 @@ do not rename the same project for different audiences.
 | Three-weapon pre-day Elo | 16,365 untouched bouts | AUC 0.817; log loss 0.526 | Uninformative AUC 0.500; log loss 0.693 | Lift |
 | Foil pose outcomes | 9,328 OOF clips / 1,332 videos | Balanced accuracy 0.465; macro-F1 0.464 | Majority 0.333 / 0.216 | Lift |
 | MFAD action recognition | 928 sequences / 27 held-out participants | Balanced accuracy 0.794; macro-F1 0.798 | Majority 0.327 / 0.244 | Lift |
-| Ranking trajectory | 16,687 chronological transitions | MAE 2.207 places | Persistence MAE 2.153 | **No lift** |
+| Ranking trajectory | 15,945 held-out forecast origins | Challenger MAE 2.116 places | Persistence MAE 2.062 | **Selected persistence** |
 | Static lunge velocity | 45 participant-held-out predictions | RMSE 0.179 m/s | Mean RMSE 0.177 m/s | **No lift** |
 | Advance lunge velocity | 45 participant-held-out predictions | RMSE 0.449 m/s | Mean RMSE 0.477 m/s | Small lift; limited N |
 | Junior pool outcomes | 37,813 untouched bouts | Accuracy 0.8474; AUC 0.9167 | Higher seed 0.8471 / 0.9167 | **No material lift** |
@@ -222,3 +222,9 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md), [SECURITY.md](SECURITY.md), and
 Software citation metadata are available in [`CITATION.cff`](CITATION.cff). Analysis users should
 also cite each original source named in the relevant manifest. Code is released under the
 [MIT License](LICENSE); upstream data and media retain their own terms.
+
+### Evaluating the next ranking snapshot
+
+The trajectory benchmark fits on outcomes available before the cutoff and evaluates forecasts issued on or after it. Pairs that bridge the cutoff are reported separately. Feature categories are learned on the training set. The report compares absolute errors on identical forecasts against carrying the current rank forward, both per transition and per category-specific athlete series. Its percentile interval resamples whole series; series may represent the same person across categories. A positive gain means lower error than persistence.
+
+Rerunning the local [US team ranking archive](data/manifests/usa-team-ranking-history-summary.json) with a 2020-01-01 cutoff yielded 47,184 training pairs, 15,945 test pairs and 742 crossing pairs removed. Across 2,375 held-out category series, carrying the current rank forward had lower mean absolute error than the gradient booster by 0.064 rank places on average (series bootstrap 95% interval for the baseline advantage 0.051–0.078). This compares the two methods on this archive and split.

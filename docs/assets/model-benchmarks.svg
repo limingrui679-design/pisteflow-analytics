@@ -26,7 +26,7 @@
     <rect x="50" y="274" width="1100" height="126" rx="16" fill="#14212d" stroke="#c48b35"/>
     <text x="76" y="307" fill="#ffd28d" font-size="13" font-weight="700">NO VERIFIED LIFT OVER A SIMPLE BASELINE</text>
     <text x="76" y="341" fill="#ffffff" font-size="18" font-weight="700">Ranking trajectory</text>
-    <text x="260" y="341" fill="#b7d0df" font-size="15">model MAE 2.207 vs persistence 2.153 rank places</text>
+    <text x="260" y="341" fill="#b7d0df" font-size="15">challenger MAE 2.116 vs persistence 2.062 rank places</text>
     <text x="76" y="374" fill="#ffffff" font-size="18" font-weight="700">Static lunge velocity</text>
     <text x="260" y="374" fill="#b7d0df" font-size="15">model RMSE 0.179 vs mean baseline 0.177 m/s</text>
     <text x="760" y="341" fill="#ffffff" font-size="18" font-weight="700">Advance lunge</text>

@@ -48,10 +48,12 @@ def records_from_files(files: list[DriveFile]) -> list[dict[str, Any]]:
 
 def build_manifest(output_path: Path, report_path: Path) -> dict[str, Any]:
     try:
-        import gdown
+        from importlib import import_module
+
+        gdown = import_module("gdown")
     except ImportError as exc:  # pragma: no cover - optional collector
         raise RuntimeError("Install collectors: pip install -e '.[collectors]'") from exc
-    files = gdown.download_folder(  # type: ignore[attr-defined]
+    files = gdown.download_folder(
         url=DRIVE_FOLDER,
         output="log45-sabre-clips",
         quiet=True,
@@ -59,7 +61,7 @@ def build_manifest(output_path: Path, report_path: Path) -> dict[str, Any]:
     )
     if files is None:
         raise RuntimeError("Log45 Google Drive index did not return any file records")
-    records = records_from_files(files)  # type: ignore[arg-type]
+    records = records_from_files(files)
     manifest_sha256 = write_jsonl(output_path, records)
     summary: dict[str, Any] = {
         "claim_boundary": (

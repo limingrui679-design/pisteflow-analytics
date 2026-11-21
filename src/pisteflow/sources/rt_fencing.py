@@ -80,11 +80,13 @@ def acquire(archive_path: Path, *, force: bool = False) -> Path:
     if archive_path.exists() and not force and archive_path.stat().st_size == EXPECTED_BYTES:
         return archive_path
     try:
-        import gdown
+        from importlib import import_module
+
+        gdown = import_module("gdown")
     except ImportError as exc:  # pragma: no cover - optional collector
         raise RuntimeError("Install collectors: pip install -e '.[collectors]'") from exc
     archive_path.parent.mkdir(parents=True, exist_ok=True)
-    downloaded = gdown.download(  # type: ignore[attr-defined]
+    downloaded = gdown.download(
         id=DRIVE_FILE_ID,
         output=str(archive_path),
         quiet=False,

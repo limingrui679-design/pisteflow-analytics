@@ -70,10 +70,12 @@ def acquire_ego_rgb(destination: Path, *, force: bool = False) -> Path:
         destination.unlink()
     destination.parent.mkdir(parents=True, exist_ok=True)
     try:
-        import gdown
+        from importlib import import_module
+
+        gdown = import_module("gdown")
     except ImportError as exc:  # pragma: no cover - exercised only without collector extras
         raise RuntimeError("Install the collectors extra to download EgoHumans") from exc
-    result = gdown.download(  # type: ignore[attr-defined]
+    result = gdown.download(
         id=EGO_RGB_FILE_ID,
         output=str(destination),
         quiet=False,
