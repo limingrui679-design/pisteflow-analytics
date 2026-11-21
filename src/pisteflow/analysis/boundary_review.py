@@ -16,10 +16,14 @@ def _event_probability(deltas: NDArray[np.float64], rank: float, boundary: int) 
     return float(1 - below if rank <= boundary else below)
 
 
-def _expected_hits(scores: NDArray[np.float64], events: NDArray[np.bool_], slots: int) -> float:
+def _slot_weights(scores: NDArray[np.float64], slots: int) -> NDArray[np.float64]:
     threshold = np.partition(scores, len(scores) - slots)[-slots]
     above, tied = scores > threshold, scores == threshold
-    return float(events[above].sum() + (slots - above.sum()) * events[tied].mean())
+    return np.asarray(above + tied * ((slots - above.sum()) / tied.sum()), dtype=float)
+
+
+def _expected_hits(scores: NDArray[np.float64], events: NDArray[np.bool_], slots: int) -> float:
+    return float(_slot_weights(scores, slots) @ events)
 
 
 def predict_boundary_crossings(
@@ -140,4 +144,76 @@ def evaluate_boundary_review(
         ]
         if len(month_gains) > 1
         else None,
+    }
+
+
+def evaluate_origin_roster(
+    frame: pd.DataFrame,
+    development: pd.DataFrame,
+    observed_transitions: pd.DataFrame,
+    *,
+    cutoff: pd.Timestamp,
+    max_horizon_days: int,
+    boundary: int = 16,
+    capacity_fraction: float = 0.05,
+) -> dict[str, Any]:
+    """Allocate slots before looking up follow-up and bound unresolved crossing outcomes."""
+    if not 0 < capacity_fraction <= 1 or max_horizon_days < 1:
+        raise ValueError("Require a positive horizon and a capacity fraction in (0, 1]")
+    keys = ["athlete_series_id", "snapshot_date"]
+    category = ["weapon", "gender", "age_category"]
+    roster = frame.loc[frame["training_eligible"].astype(bool), [*keys, *category, "rank"]].copy()
+    roster["snapshot_date"] = pd.to_datetime(roster["snapshot_date"])
+    # Limit backtesting dates to the part of each category archive with a full horizon.
+    ends = roster.groupby(category, observed=True, dropna=False)["snapshot_date"].transform("max")
+    mature = roster["snapshot_date"] + pd.Timedelta(days=max_horizon_days) <= ends
+    origins = roster.loc[mature & roster["snapshot_date"].ge(cutoff)].reset_index(drop=True)
+    if origins.empty:
+        return {"status": "no_mature_origins", "origins": 0}
+
+    ranks = origins["rank"].to_numpy(dtype=float)
+    risk = predict_boundary_crossings(development, origins, boundary=boundary)
+    scores = {"risk": risk, "proximity": -np.abs(ranks - (boundary + 0.5))}
+    weights = {policy: np.zeros(len(origins)) for policy in [*scores, "random"]}
+    total_slots = 0
+    dates = origins.groupby("snapshot_date").indices
+    for indices in dates.values():
+        slots = math.ceil(capacity_fraction * len(indices))
+        total_slots += slots
+        for policy, values in scores.items():
+            weights[policy][indices] = _slot_weights(values[indices], slots)
+        weights["random"][indices] = slots / len(indices)
+
+    targets = (
+        origins[keys]
+        .merge(
+            observed_transitions[[*keys, "target_rank"]], on=keys, how="left", validate="one_to_one"
+        )["target_rank"]
+        .to_numpy(dtype=float)
+    )
+    missing = np.isnan(targets)
+    known_crossings = ((ranks <= boundary) != (targets <= boundary)) & ~missing
+
+    def bounds(weight: NDArray[np.float64]) -> list[float]:
+        # The same missing label applies to both policies when weight is their difference.
+        known_hits = float(weight @ known_crossings)
+        unresolved = weight[missing]
+        return [
+            known_hits + float(np.minimum(unresolved, 0).sum()),
+            known_hits + float(np.maximum(unresolved, 0).sum()),
+        ]
+
+    return {
+        "status": "evaluated",
+        "boundary": boundary,
+        "capacity_fraction": capacity_fraction,
+        "max_horizon_days": max_horizon_days,
+        "dates": len(dates),
+        "origins": len(origins),
+        "known_outcomes": int((~missing).sum()),
+        "unobserved_outcomes": int(missing.sum()),
+        "known_crossings": int(known_crossings.sum()),
+        "review_slots": total_slots,
+        "expected_hit_bounds": {policy: bounds(weight) for policy, weight in weights.items()},
+        "paired_gain_bounds_vs_proximity": bounds(weights["risk"] - weights["proximity"]),
     }

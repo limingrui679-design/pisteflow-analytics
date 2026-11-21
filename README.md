@@ -19,7 +19,7 @@ In its three-weapon Elo replay, PisteFlow updates ratings after each competition
 
 ![PisteFlow Evidence Studio overview](docs/assets/evidence-layers.svg)
 
-A top-16 crossing replay tests which ranking changes a scout could flag with a fixed share of each day’s candidates. The date-specific risk queue finds 170.83 expected crossings in 824 slots; proximity to the boundary finds 167.99. [Inspect the replay](docs/REPRODUCIBILITY.md#who-may-cross-a-ranking-boundary-by-the-next-recorded-snapshot).
+A top-16 crossing replay ranks the candidates visible on each archive date. Across 12,535 eligible category-series observations and 645 review slots, 3,508 later ranks were unobserved. An exact comparison puts the risk queue’s gain over simple rank proximity between −23.15 and +22.57 expected crossings. [Inspect the replay](docs/REPRODUCIBILITY.md#who-may-cross-a-ranking-boundary-by-the-next-recorded-snapshot).
 
 ## Try it in 90 seconds — no data download
 

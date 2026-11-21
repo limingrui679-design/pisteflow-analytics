@@ -127,6 +127,17 @@ For each forecast origin, estimate the chance of entering or leaving an illustra
 
 Replay a review queue separately on each date with slots for 5% of observed eligible transitions, rounded up. Equal scores at a budget cutoff share the remaining slots uniformly. On 47,184 training and 15,945 held-out USA category-series transitions, 452 crossed the boundary. The probability score was **0.02466 Brier**, against 0.02754 for historical prevalence and 0.02835 for predicting no change in membership. Over 60 dates and 824 review slots, the risk queue captured **170.83 expected crossings**, compared with **167.99** for ranking by distance to the boundary and **23.63** for random review within date. Fractional hits integrate ties. The historical exercise evaluates series with an observed follow-up inside 180 days and reports conditional queue performance for that cohort.
 
-Use version 1 of the [USA Fencing Team Archives](https://www.kaggle.com/datasets/ajaxofgreee/usa-fencing-team-archives), pinned by `usa_team_archives.py` to archive SHA-256 `a13d04ac1e7123de91705a25f5a5f71ffa214216fa60070316e24a62ad159872`. Run `pisteflow analysis ranking-trajectory` on the normalized USA history. The `test.boundary_review` field contains the queue and probability results. Source parquet SHA-256: `ddda27703275bc78bf0a21957fc467fbafa03cf694ca9849878240b0253020a9`.
+Use version 1 of the [USA Fencing Team Archives](https://www.kaggle.com/datasets/ajaxofgreee/usa-fencing-team-archives), pinned by `usa_team_archives.py` to archive SHA-256 `a13d04ac1e7123de91705a25f5a5f71ffa214216fa60070316e24a62ad159872`. Run `pisteflow sources usa-team-archives-fetch` to normalize the archive, then `pisteflow analysis ranking-trajectory` to reproduce the report. The `test.boundary_review` field contains the conditional queue and probability results. The `test.origin_roster_review` field contains the blind-roster bounds. Source parquet SHA-256: `ddda27703275bc78bf0a21957fc467fbafa03cf694ca9849878240b0253020a9`.
 
 Across 15 observed calendar months, the risk queue led proximity in eight, proximity led in five, and two tied. Dropping one whole month at a time leaves a gain of 0.04 to 4.19 expected crossings at the top-16 boundary. Replaying the same fixed design at the top-8 and top-32 boundaries gives 197.00 vs 190.58 and 159.77 vs 144.69 expected hits, respectively.
+
+
+The blind-roster audit first ranks every eligible series visible on the day and allocates the same daily 5% budget, rounded up. Each weapon × gender × age-category archive must extend at least 180 days beyond the origin date. Only after allocation does the evaluator look up the next rank within that horizon. Across 43 dates, 12,535 eligible series-date observations filled 645 slots. Recorded follow-ups established 262 crossings among 9,027 outcomes, leaving 3,508 unresolved. For those unresolved outcomes the audit evaluates every possible binary membership change algebraically. It uses the same outcome for both policies and accounts for random tie-breaking in expectation.
+
+| Queue | Expected hits with observed crossings | Upper bound including unresolved outcomes |
+| --- | ---: | ---: |
+| Historical movement risk | 88.78 | 268.20 |
+| Proximity to the rank boundary | 90.31 | 267.25 |
+| Random within day | 13.53 | 193.63 |
+
+The paired sharp range for risk minus proximity is **−23.15 to +22.57 expected crossings**. Both queue rankings remain compatible with the incomplete outcomes. The conditional 170.83 vs 167.99 comparison above answers a different question on series known to have returned. Counts refer to category-series observations. This evaluation supplies no official team-selection threshold.
