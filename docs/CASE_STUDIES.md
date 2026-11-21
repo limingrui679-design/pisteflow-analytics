@@ -6,7 +6,7 @@ Catalog 0.2.0 contains 15 bounded cases. Negative and mixed results remain first
 |---|---|---|---|
 | [Chronological three-weapon Elo](#three-weapon-elo) | decision-analytics, statistical-inference, risk-finance | lift | Test AUC 0.817 and log loss 0.526 |
 | [Source-grouped foil pose outcomes](#foil-pose-outcomes) | reproducible-ml, statistical-inference, decision-analytics | lift | Balanced accuracy 0.465; macro-F1 0.464 |
-| [Ranking trajectory negative result](#ranking-trajectory) | statistical-inference, decision-analytics, risk-finance | no-lift | Model MAE 2.207 rank places |
+| [Ranking trajectory negative result](#ranking-trajectory) | statistical-inference, decision-analytics, risk-finance | no-lift | Unblended challenger MAE 2.116 places |
 | [Strength and lunge velocity associations](#strength-lunge-velocity) | population-health, statistical-inference, reproducible-ml | mixed | Advance RMSE 0.449 m/s; static RMSE 0.179 m/s |
 | [Seed-aware junior pool outcomes](#junior-pool-outcomes) | decision-analytics, risk-finance, statistical-inference | no-lift | Model accuracy 0.8474 and AUC 0.9167 |
 | [Sabre gaze and touch outcomes](#sabre-eye-outcomes) | behavioral-science, population-health, statistical-inference | no-lift | Model AUC 0.578 and log loss 0.691 |
@@ -59,12 +59,12 @@ A pose baseline excludes scoring lights and duplicate windows, then evaluates al
 A chronological model tests an intuitive feature-rich approach against a strong persistence rule and preserves the inferior result.
 
 - **Question:** Can engineered history features improve the next observed ranking snapshot over simply carrying the current rank forward?
-- **Unit / sample:** next-snapshot transition; 63,871 eligible transitions; 16,687 transitions in the 2020-2023 test period
-- **Method:** Chronological regression using current and prior ranking features without athlete identity
-- **Validation:** Target-date holdout from 2020 onward with a current-rank persistence benchmark
-- **Result:** Model MAE 2.207 rank places
-- **Baseline:** Persistence MAE 2.153 rank places
-- **Decision use:** Prevents adoption of unnecessary model complexity when a transparent rule performs better
+- **Unit / sample:** next-snapshot transition; 47,184 development transitions; 742 crossing pairs purged; 15,945 held-out origins in 2,375 series
+- **Method:** Two expanding development folds select a blend by series-balanced MAE. Forecasts use current and earlier features only.
+- **Validation:** Fitted labels precede every fold origin. Final test origins are on or after 2020-01-01.
+- **Result:** Unblended challenger MAE 2.116 places
+- **Baseline:** Selected persistence MAE 2.062 places
+- **Decision use:** Export the persistence rule chosen using development data. Held-out series-balanced improvement over persistence was exactly zero.
 - **Boundary:** Category series are not verified unique people and may span both sides of the time split; this is not an official ranking feed, selection forecast, or causal athlete-development model.
 - **Evidence:** `reports/model-cards/ranking-trajectory.json`
 

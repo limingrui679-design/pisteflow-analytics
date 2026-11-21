@@ -73,3 +73,18 @@ def test_purges_crossing_transitions_and_estimates_paired_series_gain() -> None:
     )
     assert skill["transition_weighted_mae_gain"] == 0.5
     assert skill["series_balanced_mae_gain"] == -1.0
+
+
+def test_weight_selection_uses_only_pre_cutoff_targets_and_equal_scores_favour_persistence():
+    frame = _frame()
+    frame["rank"] = 1
+    report, predictor, _ = ranking_trajectory.evaluate_trajectory(frame)
+    assert predictor.weight == 0
+    folds = report["development_selection"]["folds"]
+    assert folds
+    for fold in folds:
+        assert fold["last_fit_target"] < fold["first_validation_origin"]
+        assert fold["last_validation_target"] < report["cutoff"]
+    transitions, _ = ranking_trajectory.build_transitions(frame)
+    weight, evidence = ranking_trajectory.select_weight(transitions.iloc[:1])
+    assert weight == 0 and evidence["fallback"]

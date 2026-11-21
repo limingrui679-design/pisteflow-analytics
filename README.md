@@ -64,7 +64,7 @@ do not rename the same project for different audiences.
 | Three-weapon pre-day Elo | 16,365 untouched bouts | AUC 0.817; log loss 0.526 | Uninformative AUC 0.500; log loss 0.693 | Lift |
 | Foil pose outcomes | 9,328 OOF clips / 1,332 videos | Balanced accuracy 0.465; macro-F1 0.464 | Majority 0.333 / 0.216 | Lift |
 | MFAD action recognition | 928 sequences / 27 held-out participants | Balanced accuracy 0.794; macro-F1 0.798 | Majority 0.327 / 0.244 | Lift |
-| Ranking trajectory | 16,687 chronological transitions | MAE 2.207 places | Persistence MAE 2.153 | **No lift** |
+| Ranking trajectory | 15,945 held-out forecast origins | Challenger MAE 2.116 places | Persistence MAE 2.062 | **Selected persistence** |
 | Static lunge velocity | 45 participant-held-out predictions | RMSE 0.179 m/s | Mean RMSE 0.177 m/s | **No lift** |
 | Advance lunge velocity | 45 participant-held-out predictions | RMSE 0.449 m/s | Mean RMSE 0.477 m/s | Small lift; limited N |
 | Junior pool outcomes | 37,813 untouched bouts | Accuracy 0.8474; AUC 0.9167 | Higher seed 0.8471 / 0.9167 | **No material lift** |

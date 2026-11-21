@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import pickle
+from dataclasses import dataclass
 from itertools import pairwise
 from pathlib import Path
 from typing import Any
@@ -138,6 +139,69 @@ def _model(train_rows: int) -> HistGradientBoostingRegressor:
     )
 
 
+@dataclass
+class RankForecast:
+    """Keep the existing log-rank predict contract when serializing the selected forecast."""
+
+    challenger: HistGradientBoostingRegressor
+    weight: float
+
+    @property
+    def n_features_in_(self) -> int:
+        return int(self.challenger.n_features_in_)
+
+    def predict(self, matrix: pd.DataFrame) -> np.ndarray:
+        if self.weight == 0:
+            return np.asarray(matrix["log_current_rank"], dtype=float).copy()
+        baseline = np.expm1(matrix["log_current_rank"].to_numpy())
+        challenger = np.maximum(1.0, np.expm1(self.challenger.predict(matrix)))
+        return np.asarray(np.log1p(baseline + self.weight * (challenger - baseline)), dtype=float)
+
+
+def select_weight(development: pd.DataFrame) -> tuple[float, dict[str, Any]]:
+    """Select on expanding development folds. Every validation origin follows all fit targets."""
+    dates = sorted(development["snapshot_date"].unique())
+    validation: list[pd.DataFrame] = []
+    folds = []
+    weights = (0.0, 0.25, 0.5, 0.75, 1.0)
+    # The last half of dated origins supplies at most two disjoint validation blocks.
+    for i, j in zip(
+        (len(dates) // 2, 3 * len(dates) // 4), (3 * len(dates) // 4, len(dates)), strict=True
+    ):
+        if i == j:
+            continue
+        origin = dates[i]
+        fit = development.loc[development["target_date"] < origin]
+        val = development.loc[development["snapshot_date"].isin(dates[i:j])]
+        if fit.empty or val.empty:
+            continue
+        x = feature_matrix(fit)
+        xv = feature_matrix(val).reindex(columns=x.columns, fill_value=0.0)
+        challenger = _model(len(fit)).fit(x, np.log1p(fit["target_rank"].astype(float)))
+        raw = np.maximum(1.0, np.expm1(challenger.predict(xv)))
+        rank = val["rank"].astype(float).to_numpy()
+        truth = val["target_rank"].astype(float).to_numpy()
+        errors = pd.DataFrame({w: np.abs(truth - (rank + w * (raw - rank))) for w in weights})
+        errors.index = val["athlete_series_id"].to_numpy()
+        validation.append(errors)
+        folds.append(
+            {
+                "last_fit_target": fit["target_date"].max().date().isoformat(),
+                "first_validation_origin": val["snapshot_date"].min().date().isoformat(),
+                "last_validation_target": val["target_date"].max().date().isoformat(),
+                "validation_rows": len(val),
+            }
+        )
+    losses = pd.concat(validation).groupby(level=0).mean().mean() if validation else {}
+    weight = float(min(weights, key=lambda w: (losses[w], w))) if validation else 0.0
+    return weight, {
+        "selected_weight": weight,
+        "folds": folds,
+        "series_balanced_validation_mae": {str(w): float(losses[w]) for w in weights if validation},
+        "fallback": None if validation else "no_eligible_internal_fold_use_persistence",
+    }
+
+
 def paired_series_skill(
     series_ids: pd.Series,
     truth: np.ndarray,
@@ -168,7 +232,7 @@ def evaluate_trajectory(
     *,
     cutoff: pd.Timestamp = DEFAULT_CUTOFF,
     max_horizon_days: int = MAX_HORIZON_DAYS,
-) -> tuple[dict[str, Any], HistGradientBoostingRegressor, list[str]]:
+) -> tuple[dict[str, Any], RankForecast, list[str]]:
     transitions, all_transitions = build_transitions(frame, max_horizon_days=max_horizon_days)
     train_mask = transitions["target_date"].lt(cutoff).to_numpy()
     test_mask = transitions["snapshot_date"].ge(cutoff).to_numpy()
@@ -181,8 +245,10 @@ def evaluate_trajectory(
         columns=train_matrix.columns, fill_value=0.0
     )
     model.fit(train_matrix, np.log1p(truth[train_mask]))
-    predicted = np.maximum(1.0, np.expm1(model.predict(test_matrix)))
+    weight, selection = select_weight(transitions.loc[train_mask])
+    raw = np.maximum(1.0, np.expm1(model.predict(test_matrix)))
     baseline = transitions.loc[test_mask, "rank"].astype(float).to_numpy()
+    predicted = baseline + weight * (raw - baseline)
     test_truth = truth[test_mask]
     test_rows = transitions.loc[test_mask].reset_index(drop=True)
     by_weapon = {}
@@ -232,6 +298,7 @@ def evaluate_trajectory(
         "last_training_target": transitions.loc[train_mask, "target_date"].max().date().isoformat(),
         "first_test_origin": test_rows["snapshot_date"].min().date().isoformat(),
         "random_seed": RANDOM_SEED,
+        "development_selection": selection,
         "raw_eligible_rows": int(frame["training_eligible"].astype(bool).sum()),
         "category_specific_series": int(frame["athlete_series_id"].nunique()),
         "all_next_observation_transitions": all_transitions,
@@ -254,6 +321,7 @@ def evaluate_trajectory(
         "test": {
             "model": _metrics(test_truth, predicted),
             "persistence_baseline": _metrics(test_truth, baseline),
+            "unblended_challenger": _metrics(test_truth, raw),
             "paired_skill": paired_series_skill(
                 test_rows["athlete_series_id"], test_truth, predicted, baseline
             ),
@@ -264,7 +332,7 @@ def evaluate_trajectory(
     matrix = feature_matrix(transitions)
     final_model = _model(len(transitions))
     final_model.fit(matrix, np.log1p(truth))
-    return report, final_model, list(matrix.columns)
+    return report, RankForecast(final_model, weight), list(matrix.columns)
 
 
 def train_and_report(input_path: Path, model_path: Path, report_path: Path) -> dict[str, Any]:
