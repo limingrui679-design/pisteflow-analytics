@@ -7,11 +7,11 @@
 [![Claims](https://img.shields.io/badge/claims-evidence--bounded-189468)](#evidence-contract)
 [![License](https://img.shields.io/badge/code-MIT-526b7a)](LICENSE)
 
-**A Python-first evidence system for real fencing competition, motion, behavior, athlete-health,
-data-governance, and spatial-access questions across epee, foil, and sabre.**
+**Use past bouts to study what carries forward into the next fencing competition.**
 
-PisteFlow does more than run models. It records what one row means, isolates leakage, compares with
-credible baselines, preserves negative results, and states what each result cannot prove.
+Fencing results arrive as bouts, tournament rankings and updates published on different dates. PisteFlow reconstructs the order in which results became available, then tests ratings on later bouts. Analysts can compare performance across épée, foil and sabre or open a worked case on ranking movement, motion or access to clubs.
+
+In its three-weapon Elo replay, PisteFlow updates ratings after each competition day so earlier predictions use only earlier results. On 16,365 held-out bouts from 2020, the ratings achieved an AUC of 0.817 and a log loss of 0.526, compared with 0.500 and 0.693 for a constant 50% prediction. [Inspect the evaluation](docs/CASE_STUDIES.md#three-weapon-elo)
 
 [Evidence Studio](https://limingrui679-design.github.io/pisteflow-analytics/) ·
 [Case guide](docs/CASE_STUDIES.md) · [Data atlas](docs/DATA_ATLAS.md) ·
