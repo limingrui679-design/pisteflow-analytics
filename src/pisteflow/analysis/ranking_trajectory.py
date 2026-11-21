@@ -14,6 +14,7 @@ from scipy.stats import spearmanr
 from sklearn.ensemble import HistGradientBoostingRegressor
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
+from pisteflow.analysis.boundary_review import evaluate_boundary_review, evaluate_origin_roster
 from pisteflow.provenance import sha256_file, write_json
 
 RANDOM_SEED = 20260815
@@ -319,6 +320,14 @@ def evaluate_trajectory(
             "weapon, gender, and age category; no future scores or athlete-series identity"
         ),
         "test": {
+            "boundary_review": evaluate_boundary_review(transitions.loc[train_mask], test_rows),
+            "origin_roster_review": evaluate_origin_roster(
+                frame,
+                transitions.loc[train_mask],
+                test_rows,
+                cutoff=cutoff,
+                max_horizon_days=max_horizon_days,
+            ),
             "model": _metrics(test_truth, predicted),
             "persistence_baseline": _metrics(test_truth, baseline),
             "unblended_challenger": _metrics(test_truth, raw),
