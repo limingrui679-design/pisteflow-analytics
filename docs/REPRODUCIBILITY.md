@@ -120,3 +120,13 @@ surfaces are present.
 Reproducing a metric confirms that the public code and named input produce the recorded internal
 result. It does not establish source truth, causal effect, independent review, federation approval,
 clinical validity, organizational adoption, production reliability, or user impact.
+
+### Who may cross a ranking boundary by the next recorded snapshot?
+
+For each forecast origin, estimate the chance of entering or leaving an illustrative top 16. The forecaster learns signed rank movements from development transitions whose outcomes precede every forecast origin. It groups by weapon and current-rank band (powers of two) and shrinks each cell distribution toward the pooled changes with 20 prior observations. The numerical rank determines the movement needed for a crossing. `predict_boundary_crossings(development, origins)` accepts an unlabelled set of origins with just weapon, rank and date.
+
+Replay a review queue separately on each date with slots for 5% of observed eligible transitions, rounded up. Equal scores at a budget cutoff share the remaining slots uniformly. On 47,184 training and 15,945 held-out USA category-series transitions, 452 crossed the boundary. The probability score was **0.02466 Brier**, against 0.02754 for historical prevalence and 0.02835 for predicting no change in membership. Over 60 dates and 824 review slots, the risk queue captured **170.83 expected crossings**, compared with **167.99** for ranking by distance to the boundary and **23.63** for random review within date. Fractional hits integrate ties. The historical exercise evaluates series with an observed follow-up inside 180 days and reports conditional queue performance for that cohort.
+
+Use version 1 of the [USA Fencing Team Archives](https://www.kaggle.com/datasets/ajaxofgreee/usa-fencing-team-archives), pinned by `usa_team_archives.py` to archive SHA-256 `a13d04ac1e7123de91705a25f5a5f71ffa214216fa60070316e24a62ad159872`. Run `pisteflow analysis ranking-trajectory` on the normalized USA history. The `test.boundary_review` field contains the queue and probability results. Source parquet SHA-256: `ddda27703275bc78bf0a21957fc467fbafa03cf694ca9849878240b0253020a9`.
+
+Across 15 observed calendar months, the risk queue led proximity in eight, proximity led in five, and two tied. Dropping one whole month at a time leaves a gain of 0.04 to 4.19 expected crossings at the top-16 boundary. Replaying the same fixed design at the top-8 and top-32 boundaries gives 197.00 vs 190.58 and 159.77 vs 144.69 expected hits, respectively.
