@@ -222,3 +222,9 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md), [SECURITY.md](SECURITY.md), and
 Software citation metadata are available in [`CITATION.cff`](CITATION.cff). Analysis users should
 also cite each original source named in the relevant manifest. Code is released under the
 [MIT License](LICENSE); upstream data and media retain their own terms.
+
+### Evaluating the next ranking snapshot
+
+The trajectory benchmark fits on outcomes available before the cutoff and evaluates forecasts issued on or after it. Pairs that bridge the cutoff are reported separately. Feature categories are learned on the training set. The report compares absolute errors on identical forecasts against carrying the current rank forward, both per transition and per category-specific athlete series. Its percentile interval resamples whole series; series may represent the same person across categories. A positive gain means lower error than persistence.
+
+Rerunning the local [US team ranking archive](data/manifests/usa-team-ranking-history-summary.json) with a 2020-01-01 cutoff yielded 47,184 training pairs, 15,945 test pairs and 742 crossing pairs removed. Across 2,375 held-out category series, carrying the current rank forward had lower mean absolute error than the gradient booster by 0.064 rank places on average (series bootstrap 95% interval for the baseline advantage 0.051–0.078). This compares the two methods on this archive and split.

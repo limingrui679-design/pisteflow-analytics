@@ -51,3 +51,25 @@ def test_chronological_evaluation_covers_three_weapons() -> None:
     assert "target_rank" not in features
     assert np.isfinite(report["test"]["model"]["mae_rank_places"])
     assert model.n_features_in_ == len(features)
+
+
+def test_purges_crossing_transitions_and_estimates_paired_series_gain() -> None:
+    frame = _frame()
+    report, _, _ = ranking_trajectory.evaluate_trajectory(frame)
+    assert report["last_training_target"] < report["cutoff"] <= report["first_test_origin"]
+    assert report["purged_crossing_transitions"] == 30
+    assert (
+        sum(
+            report[x]
+            for x in ("train_transitions", "test_transitions", "purged_crossing_transitions")
+        )
+        == report["eligible_transitions"]
+    )
+    skill = ranking_trajectory.paired_series_skill(
+        pd.Series(["a", "a", "a", "b"]),
+        np.ones(4),
+        np.array([1.0, 1.0, 1.0, 5.0]),
+        np.array([3.0, 3.0, 3.0, 1.0]),
+    )
+    assert skill["transition_weighted_mae_gain"] == 0.5
+    assert skill["series_balanced_mae_gain"] == -1.0
